@@ -1,11 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RISE Group & Benchmark - Comprehensive Plan</title>
+    <title>Insurance Carrier Contact Directory</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #1e3a5f;
+            --primary-blue-light: #2d5a8a;
+            --accent-gold: #d4a853;
+            --accent-gold-light: #e8c47a;
+            --bg-cream: #faf8f5;
+            --bg-white: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-muted: #6b7280;
+            --border-light: #e5e7eb;
+            --shadow-soft: 0 4px 20px rgba(30, 58, 95, 0.08);
+            --shadow-medium: 0 8px 30px rgba(30, 58, 95, 0.12);
+            --shadow-hover: 0 12px 40px rgba(30, 58, 95, 0.18);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,390 +28,1084 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 40px 20px;
-            color: #2d3748;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg-cream);
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 168, 83, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 58, 95, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            padding: 40px 24px;
+            position: relative;
+            z-index: 1;
         }
 
         .header {
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
             text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         .header h1 {
-            color: #667eea;
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 12px;
         }
 
         .header p {
-            color: #718096;
-            font-size: 1.1em;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 500px;
+            margin: 0 auto;
         }
 
-        .grid {
+        .view {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        .home-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
-        }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-        }
-
-        .card-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-right: 15px;
-        }
-
-        .icon-purple { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
-        .icon-blue { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .icon-green { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        .icon-orange { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
-
-        .card-title {
-            font-size: 1.3em;
-            font-weight: 600;
-            color: #2d3748;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 600;
-            margin: 8px 8px 8px 0;
-        }
-
-        .status-live {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-
-        .status-scheduled {
-            background: #bee3f8;
-            color: #2c5282;
-        }
-
-        .status-ready {
-            background: #feebc8;
-            color: #7c2d12;
-        }
-
-        .status-in-progress {
-            background: #e9d8fd;
-            color: #44337a;
-        }
-
-        .section {
-            margin: 20px 0;
-        }
-
-        .section-title {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::before {
-            content: "";
-            width: 4px;
-            height: 20px;
-            background: #667eea;
-            margin-right: 10px;
-            border-radius: 2px;
-        }
-
-        .item-list {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .item-list li {
-            padding: 10px 0;
-            padding-left: 30px;
-            position: relative;
-            color: #4a5568;
-            line-height: 1.6;
-        }
-
-        .item-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #48bb78;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-
-        .outcome-box {
-            background: #f7fafc;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border-left: 4px solid #667eea;
-        }
-
-        .outcome-box strong {
-            color: #667eea;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .next-steps {
-            background: #fff5f5;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            border-left: 4px solid #f56565;
-        }
-
-        .next-steps strong {
-            color: #c53030;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background: #e2e8f0;
-            border-radius: 10px;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
-            border-radius: 10px;
-            transition: width 0.5s ease;
-        }
-
-        .footer {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            text-align: center;
-            color: #718096;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8em;
-            }
-            
-            .grid {
+            .home-grid {
                 grid-template-columns: 1fr;
             }
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .main-card {
+            background: var(--bg-white);
+            border-radius: 24px;
+            padding: 48px 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            transition: height 0.3s ease;
+        }
+
+        .main-card.pl::before {
+            background: linear-gradient(135deg, #d4a853 0%, #e8c47a 100%);
+        }
+
+        .main-card.cl::before {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8a 100%);
+        }
+
+        .main-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .main-card:hover::before {
+            height: 8px;
+        }
+
+        .main-card.pl:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .main-card.cl:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .main-card:hover .card-icon {
+            transform: scale(1.1);
+        }
+
+        .main-card.pl .card-icon {
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(232, 196, 122, 0.15) 100%);
+        }
+
+        .main-card.cl .card-icon {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(45, 90, 138, 0.1) 100%);
+        }
+
+        .card-icon svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .main-card.pl .card-icon svg {
+            color: var(--accent-gold);
+        }
+
+        .main-card.cl .card-icon svg {
+            color: var(--primary-blue);
+        }
+
+        .main-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .main-card.pl h2 {
+            color: var(--accent-gold);
+        }
+
+        .main-card.cl h2 {
+            color: var(--primary-blue);
+        }
+
+        .main-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: block;
+        }
+
+        .main-card.pl .stat-number {
+            color: var(--accent-gold);
+        }
+
+        .main-card.cl .stat-number {
+            color: var(--primary-blue);
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 32px;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        .back-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-badge {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section-badge.pl {
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(232, 196, 122, 0.15) 100%);
+            color: var(--accent-gold);
+        }
+
+        .section-badge.cl {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(45, 90, 138, 0.1) 100%);
+            color: var(--primary-blue);
+        }
+
+        .section-title h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 48px;
+            border: 2px solid var(--border-light);
+            border-radius: 14px;
+            font-size: 0.95rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--bg-white);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.08);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            color: var(--text-muted);
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .company-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            border: 2px solid transparent;
+        }
+
+        .company-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .company-card.pl:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .company-card.cl:hover {
+            border-color: var(--primary-blue);
+        }
+
+        .company-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .company-card .contact-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .company-card .contact-count svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .company-card.pl .contact-count svg {
+            color: var(--accent-gold);
+        }
+
+        .company-card.cl .contact-count svg {
+            color: var(--primary-blue);
+        }
+
+        .company-header {
+            background: var(--bg-white);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .company-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .company-header .meta {
+            display: flex;
+            gap: 24px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .company-header .meta span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-card {
+            background: var(--bg-white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .contact-card:hover {
+            box-shadow: var(--shadow-medium);
+        }
+
+        .contact-card.pl {
+            border-left-color: var(--accent-gold);
+        }
+
+        .contact-card.cl {
+            border-left-color: var(--primary-blue);
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .contact-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .contact-card.pl .contact-avatar {
+            background: linear-gradient(135deg, rgba(212, 168, 83, 0.15) 0%, rgba(232, 196, 122, 0.15) 100%);
+            color: var(--accent-gold);
+        }
+
+        .contact-card.cl .contact-avatar {
+            background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(45, 90, 138, 0.1) 100%);
+            color: var(--primary-blue);
+        }
+
+        .contact-info h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .contact-info .position {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .contact-info .department {
+            font-size: 0.8rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-top: 4px;
+        }
+
+        .contact-card.pl .contact-info .department {
+            background: rgba(212, 168, 83, 0.1);
+            color: var(--accent-gold);
+        }
+
+        .contact-card.cl .contact-info .department {
+            background: rgba(30, 58, 95, 0.08);
+            color: var(--primary-blue);
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .detail-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .detail-row svg {
+            width: 18px;
+            height: 18px;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+
+        .detail-row a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: color 0.2s;
+            word-break: break-all;
+        }
+
+        .detail-row a:hover {
+            color: var(--accent-gold);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state svg {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+    <div class="bg-pattern"></div>
+    
     <div class="container">
-        <div class="header">
-            <h1>📊 Comprehensive Plan Dashboard</h1>
-            <p>RISE Group & Benchmark - Current Status & Next Steps</p>
-        </div>
+        <header class="header">
+            <h1>🏢 Carrier Contact Directory</h1>
+            <p>Quick access to insurance carrier contacts organized by line of business</p>
+        </header>
 
-        <div class="grid">
-            <!-- Project 1: Marketing Outreach -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon icon-purple">📢</div>
-                    <div class="card-title">Marketing Outreach</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Campaign Status</div>
-                    <div style="margin: 15px 0;">
-                        <strong>Leasing Campaigns</strong>
-                        <div style="margin: 10px 0;">
-                            <span class="status-badge status-live">✅ Live</span> Wood Forest Leasing
+        <!-- Home View -->
+        <div id="homeView" class="view active">
+            <div class="home-grid">
+                <div class="main-card pl" onclick="showCompanyList('PL')">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                    <h2>Personal Lines</h2>
+                    <p>Home, Auto & Personal Insurance</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="plCompanyCount">-</span>
+                            <span class="stat-label">Carriers</span>
                         </div>
-                        <div style="margin: 10px 0;">
-                            <span class="status-badge status-scheduled">🔄 Today</span> KT Business Park
+                        <div class="stat">
+                            <span class="stat-number" id="plContactCount">-</span>
+                            <span class="stat-label">Contacts</span>
                         </div>
                     </div>
-                    <div style="margin: 15px 0;">
-                        <span class="status-badge status-ready">Owner Campaign Ready</span>
-                        <span class="status-badge status-live">Broker Campaign Active</span>
+                </div>
+
+                <div class="main-card cl" onclick="showCompanyList('CL')">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                        </svg>
                     </div>
-                </div>
-
-                <div class="outcome-box">
-                    <strong>Work in Progress:</strong>
-                    <ul class="item-list">
-                        <li>Updated contact records in GoHighLevel</li>
-                        <li>Created outreach tracking dashboard</li>
-                        <li>Organized RISE Group & Benchmark contacts</li>
-                    </ul>
-                </div>
-
-                <div class="next-steps">
-                    <strong>Next Steps:</strong>
-                    <ul class="item-list" style="padding-left: 20px;">
-                        <li style="color: #c53030;">Optimize workflows in GoHighLevel</li>
-                        <li style="color: #c53030;">Consolidate campaign workflows</li>
-                    </ul>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 75%;"></div>
-                </div>
-            </div>
-
-            <!-- Project 2: Brand Assets -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon icon-blue">🎨</div>
-                    <div class="card-title">Brand Asset Development</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Templates Created</div>
-                    <div style="margin: 15px 0;">
-                        <span class="status-badge status-live">✅ Complete</span>
+                    <h2>Commercial Lines</h2>
+                    <p>Business & Commercial Insurance</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="clCompanyCount">-</span>
+                            <span class="stat-label">Carriers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="clContactCount">-</span>
+                            <span class="stat-label">Contacts</span>
+                        </div>
                     </div>
-                </div>
-
-                <div class="outcome-box">
-                    <strong>Work in Progress:</strong>
-                    <ul class="item-list">
-                        <li>RISE Group brand templates in Canva</li>
-                        <li>Benchmark brand templates in Canva</li>
-                    </ul>
-                </div>
-
-                <div class="outcome-box" style="margin-top: 15px; background: #f0fff4; border-left-color: #48bb78;">
-                    <strong style="color: #22543d;">Impact:</strong>
-                    <ul class="item-list">
-                        <li>Faster content creation</li>
-                        <li>Consistent brand presentation</li>
-                    </ul>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 100%;"></div>
-                </div>
-            </div>
-
-            <!-- Project 3: Onboarding & Offboarding -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon icon-green">👥</div>
-                    <div class="card-title">Onboarding & Offboarding</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Collaboration with Wes</div>
-                    <div style="margin: 15px 0;">
-                        <span class="status-badge status-in-progress">🔄 In Progress</span>
-                    </div>
-                </div>
-
-                <div class="outcome-box">
-                    <strong>Work in Progress:</strong>
-                    <ul class="item-list">
-                        <li>Received plan from Wes</li>
-                        <li>Brainstorming ideas together for best outcome</li>
-                        <li>Connected LastPass with Microsoft Entra ID</li>
-                    </ul>
-                </div>
-
-                <div class="next-steps">
-                    <strong>Next Steps:</strong>
-                    <ul class="item-list" style="padding-left: 20px;">
-                        <li style="color: #c53030;">Finalize onboarding checklist</li>
-                        <li style="color: #c53030;">Define offboarding steps</li>
-                        <li style="color: #c53030;">Align system access protocols</li>
-                    </ul>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 60%;"></div>
-                </div>
-            </div>
-
-            <!-- Project 4: Agency Zoom -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon icon-orange">🎯</div>
-                    <div class="card-title">Agency Zoom Services</div>
-                </div>
-
-                <div class="section">
-                    <div class="section-title">Service Setup</div>
-                    <div style="margin: 15px 0;">
-                        <span class="status-badge status-in-progress">🔄 In Progress</span>
-                    </div>
-                </div>
-
-                <div class="outcome-box">
-                    <strong>Work in Progress:</strong>
-                    <ul class="item-list">
-                        <li>Updated templates in Agency Zoom</li>
-                        <li>Collaborating with Divit on services</li>
-                    </ul>
-                </div>
-
-                <div class="next-steps">
-                    <strong>Next Steps:</strong>
-                    <ul class="item-list" style="padding-left: 20px;">
-                        <li style="color: #c53030;">Finalize service configuration</li>
-                        <li style="color: #c53030;">Validate templates and workflows</li>
-                    </ul>
-                </div>
-
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 65%;"></div>
                 </div>
             </div>
         </div>
 
-        <div class="footer">
-            <p><strong>Overall Progress:</strong> Multiple projects in active development with clear next steps defined</p>
-            <p style="margin-top: 10px; font-size: 0.9em;">Last Updated: December 2024</p>
+        <!-- Company List View -->
+        <div id="companyListView" class="view">
+            <button class="back-btn" onclick="goHome()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Home
+            </button>
+
+            <div class="section-header">
+                <div class="section-title">
+                    <span class="section-badge" id="companyListBadge">Personal Lines</span>
+                    <h2 id="companyListTitle">Select a Carrier</h2>
+                </div>
+                <div class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="companySearch" placeholder="Search carriers..." oninput="filterCompanies()">
+                </div>
+            </div>
+
+            <div class="company-grid" id="companyGrid"></div>
+        </div>
+
+        <!-- Contact Details View -->
+        <div id="contactView" class="view">
+            <button class="back-btn" onclick="goBackToCompanies()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                Back to Carriers
+            </button>
+
+            <div class="company-header">
+                <h2 id="selectedCompanyName">Company Name</h2>
+                <div class="meta">
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span id="contactCountText">0 Contacts</span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="section-header">
+                <div class="search-box">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="contactSearch" placeholder="Search contacts..." oninput="filterContacts()">
+                </div>
+            </div>
+
+            <div class="contact-grid" id="contactGrid"></div>
         </div>
     </div>
+
+    <script>
+        const csvData = `Company,Name,Position,Department,Email,Business #,Cell #,Fax #
+3 Mark Financial,Tammy Schoenfeld,CL Underwriter,Commercial Lines,tammy.schoenfeld@3mark.com,(281)2692310 ext.,() ext.,281.269.2300
+Accident Fund Insurance Company of America 1,Stephanie Bustos,CL Underwriter,WORKERS COMPENSATION,stephanie.bustos@accidentfund.com,(866)2065851,281760356,866) 814-5595
+Accident Fund Insurance Company of America 1,Accident Notifications,Comm Notifications,Commercial Lines,AgentAlert@agency-connection.com,(866)2065851,() ext.,866) 814-5595
+Accident Fund Insurance Company of America 1,Accident Fund Support,Endorsements,Commercial Lines,policysupport@accidentfund.com,(866)2065851,() ext.,866) 814-5595
+Accident Insurance Company,Colin Williams,Casualty Underwriter,Commercial Lines,colin.williams@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Derek Roberts,Casualty Underwriter,Commercial Lines,derek.roberts@aicunderwriters.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Johnathan Lynch,Casualty Underwriter,Commercial Lines,jonathan.lynch@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Kristina Sarten,Casualty Underwriter,Commercial Lines,kristina.sarten@aicunderwriters.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Allan Wallace,CL Underwriter,Commercial Lines,alan.wallace@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Aydia Shields,CL Underwriter,Commercial Lines,aydia.shields@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Warren Palmer,CL Underwriter,Commercial Lines,warren.palmer@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+Accident Insurance Company,Dayana Rivera,STANDARD LINES UW,Commercial Lines,dayana.herrera@accinsco.com,(865)4251052 ext.,(800) 896-6884,877-396-6215
+ACE COMMERCIAL RISK SERVICES,Alexandra Dahl,PL Underwriter,,alexandra.dahl@acegroup.com,(713)8054655 ext.,() ext.,
+ACE Westchester Specialty Group,Peggy Maginnis,STANDARD LINES UW,Commercial Lines,peggy.maginnis@ace-ina.com,(484)3214141 ext.,() ext.,
+ACE Westchester Specialty Group,Richard Edwards,STANDARD LINES UW,Commercial Lines,richard.edwards@acegroup.com,(484)3214141 ext.,() ext.,
+ACE Westchester Specialty Group,Zachary Amole,STANDARD LINES UW,Commercial Lines,zachary.amole@acegroup.com,(484)3214141 ext.,() ext.,
+Affluent Insurance Program LLC,Lisa Wynn,CL Underwriter,Commercial Lines,lisa@affluentip.com,(561)5989275 ext.,() ext.,
+Affluent Insurance Program LLC,Affluent Insurance Program,PL Underwriter,Personal Lines,merideths@affluentip.com,(561)5989275 ext.,() ext.,
+AMC fairmont insurance services,Charles A. Thompson,CL Underwriter,Commercial Lines,charles.thopson@fairmontspeacialty.com,() ext.,(713)2088693 ext.,
+American General Company,American General Notification,Comm Notifications,Commercial Lines,webmaster@aglife.com,() ext.,() ext.,
+American Risk Insurance Co,Farzabeh Shahriary,CL Underwriter,Commercial Lines,fshahriary@americanriskins.com,7135590700 x 703,,
+American Risk Insurance Co,American Risk Notifications,PL Notifications,Personal Lines,underwriting@americanriskins.com,(713)5590715 ext.,() ext.,
+American Team Managers,ANA SIBAJA,CL Underwriter,TRANSPORTATION,ANA@ATMINSURANCE.COM,(714)4141200 ext.,() ext.,
+American Team Managers,JACKIE NAVARRO,CL Underwriter,WORKERS COMPENSATION,JACKIE@ATMINSURANCE.COM,(714)4141233 ext.,() ext.,
+American Team Managers,LILI MORONES,PL Underwriter,,LILI@ATMINSURANCE.COM,(714)4141215 ext.,() ext.,
+Amerisafe Inc.,Ashley Cooley,CL Underwriter,WORKERS COMPENSATION,acooley@amerisafe.com,(337)4603355,,
+Amerisafe Inc.,Katrina Howell,CL Underwriter,WORKERS COMPENSATION,kahowell@amerisafe.com,(337)4603355,,
+Amerisafe Inc.,Victoria Johnson,CL Underwriter,WORKERS COMPENSATION,vjohnson@amerisafe.com,(337)4603355,,
+AmTrust North America Inc,Jalen Culpepper,CL Underwriter,Renewal/BOP,Jalen.Culpepper@amtrustgroup.com,(214)3608626 ext.,() ext.,
+AmTrust North America Inc,Amtrust Notifications,Comm Notifications,Commercial Lines,ANADataServices@amtrustgroup.com,(214)3608626 ext.,() ext.,
+AmTrust North America Inc,Kat Davis,Commercial UW,Commercial Lines,kat.krasner@amtrustgroup.com,(214)3608626 ext.,() ext.,
+AmWINS Brokerage,JD Hudack,Casualty Underwriter,Associate Broker for Casualty,jd.hudack@amwins.com,(561)2539905 ext. 8905,() ext.,
+AmWINS Brokerage,Kim Blades,CL Underwriter,Commercial Lines,Kim.Blades@amwins.com,(561)8478486 ext.,() ext.,
+AmWINS Brokerage,Jamie Bush,PL Underwriter,Underwriting,Jamie.Bush@amwins.com,(214)5619309 ext.,() ext.,
+AmWINS Brokerage,John Rhodes,PL Underwriter,,John.Rhodes@amwins.com,(214)5619309 ext.,(713)4815311 ext.,
+AmWINS Brokerage,Maria Mendoza,PL Underwriter,Underwriting,Maria.Mendoza@amwins.com,(214)5616896 ext.,() ext.,
+AmWINS Brokerage,Michelle Yuko,PL Underwriter,,michelle.yuko@amwins.com,(214)5616896 ext.,() ext.,
+AmWINS Brokerage,Rachel Whitener,PL Underwriter,Underwriting,Rachel.Whitener@amwins.com,(214)5619345 ext.,() ext.,
+AmWINS Brokerage,Shelby Vasser,Property Underwriter,Associate Broker for Property,shelby.vasser@amwins.com,(561)8478903 ext.,() ext.,
+Anchor Insurance,Claims,CL Underwriter,Commercial Lines,Claims@RelyOnAnchor.com,(844)3655588 ext.,() ext.,
+Apogee Insurance Group,Chris Bradley,CL Underwriter,Commercial Lines,cbradley@apogeeinsgroup.com,(610)3373200 ext. 7021,() ext.,
+Apogee Insurance Group,Info Apogee,Comm Notifications,Commercial Lines,info@apogeeinsgroup.com,() ext.,() ext.,
+Apogee Insurance Group,Andrew Guido,PROFESSIONAL LIAB UW,Commercial Lines,aguido@apogeeinsgroup.com,() ext.,(877)3373200 ext.,
+Apogee Insurance Group,Charles Sturm RPLU,PROFESSIONAL LIAB UW,Commercial Lines,csturm@apogeeinsgroup.com,() ext.,() ext.,
+Apogee Insurance Group,Chris Hoxie,PROFESSIONAL LIAB UW,Commercial Lines,choxie@apogeeinsgroup.com,() ext.,() ext.,
+Apogee Insurance Group,Michael Cavanaugh,PROFESSIONAL LIAB UW,Commercial Lines,mcavanaugh@apogeeinsgroup.com,() ext.,() ext.,
+Appalachian Underwriters,Christina Ebel,Casualty Underwriter,Commercial Lines,christina.ebel@appund.com,(865)4257387 ext.,(888)3769633 ext.,
+Appalachian Underwriters,Daniel Hicks,Casualty Underwriter,Commercial Lines,daniel.hicks@appund.com,(865)4257387 ext.,(888)3769633 ext.,
+Appalachian Underwriters,Heather Scott,CL Underwriter,Commercial Lines,heather.scott@aicunderwriters.com,(865)4257387 ext.,(888)3769633 ext.,
+Appalachian Underwriters,Denise Payne,Commercial Insurance,Commercial Insurance,denise.payne@appund.com,(865)4257387 ext.,(888)3769633 ext.,
+Appalachian Underwriters,Carol Plunkett Elsberry,Commercial Lines,Commercial Lines,carol.elsberry@appund.com,(865)4257387 ext.,(888)3769633 ext.,
+Appalachian Underwriters,Jeffry Dunn,PL Underwriter,Commercial Lines,jeff.dunn@appund.com,(865)4257387 ext.,(865)4257309 ext.,
+Appalachian Underwriters,Michelle Elkins,STANDARD LINES UW,Commercial Lines,michelle.elkins@appund.com,(865)4257387 ext.,(888)3769633 ext.,
+Arrowhead General Insurance Agency,Monica Loveall,CL Underwriter,Commercial Lines,MLoveall@ArrowheadGrp.com,(619)3252325 ext.,() ext.,
+Ashley Wholesale Brokerage,Cordell Vogel,CL Underwriter,Underwriting,cvogel@ashleyga.com,(936)4415982 ext.,() ext.,
+Ashley Wholesale Brokerage,Heather Nelson,CL Underwriter,Commercial Lines,HNELSON@ASHLEYGA.COM,(936)4415973 ext.,() ext.,
+Atlantic specialty lines of texas LLC,Donnie Mitchell,PL Underwriter Mgr,senior vice president,donniem@atlanticspecial.com,(800)2561716 ext.,() ext.,
+Atlas General Agency Insurance,Atlas Notifications,PL Notifications,Personal Lines,atlasgeneral@atlasgeneral.com,() ext.,() ext.,
+Atlas General Agency Insurance,Robyn Dallas,PL Notifications,Personal Lines,RobynD@atlasgeneral.com,() ext.,() ext.,
+Atlas General Agency Insurance,Ysabel Jopling,PL Underwriter,Personal Lines,ysabelj@atlasgeneral.com,() ext.,() ext.,
+ATTUNE INSURANCE SERVICES LLC,David Agyei,CL Underwriter,Commercial Lines,dagyei@attuneinsurance.com,(866)3919675 ext.,() ext.,
+AXIOM INSURANCE LLC,Steve Danielson,CL Underwriter,Commercial Lines,s_danielson@axiom-ins.com,() ext.,() ext.,
+Bankers Insurance Company,Bankers Notifications,BUILDERS RISK UW,Flood,operations@bankersinsurance.com,(727) 308-0710,() ext.,
+Bankers Insurance Company,Elizabeth Corralnce,BUILDERS RISK UW,Personal Lines,elizabeth.corral@bankersinsurance.com,(727) 308-0710,() ext.,
+Bankers Insurance Company,Siobhan Falk,BUILDERS RISK UW,Personal Lines,siobhan.falk@bankersinsurance.com,(727) 308-0710,() ext.,
+Bankers Insurance Company,Brian Clapper,BUILDERS RISK UW,Personal Lines,commercial@bankersinsurance.com,(727) 308-0710,,
+Benchmark MGA,Jeri Miller,CL Underwriter,Commercial Lines,jmiller@benchmarkmga.com,(281)2694840 ext.,() ext.,
+Berkley Net Underwriters,Colton Collier,CL Underwriter,Commercial Lines,ccollier@berkleynu.com,() ext.,() ext.,
+Berkley Net Underwriters,Demetri Coulourides,CL Underwriter,Commercial Lines,dcoulourides@berkleynu.com,() ext.,() ext.,
+Berkley Net Underwriters,Kylie Wittkopp,CL Underwriter,Commercial Lines,kwittkopp@berkleynu.com,() ext.,() ext.,
+Berkshire Hathaway Guard Ins.,Chris Kametas,BOND UNDERWRITER,Commercial Lines,ckametas@guard.com,() ext.,() ext.,
+Berkshire Hathaway Guard Ins.,Will Maynard,BOND UNDERWRITER,Commercial Lines,wmaynard@guard.com,(570)6027974 ext.,() ext.,
+Berkshire Hathaway Homestate Companies,Cathy Lilly,CL Underwriter,WORKERS COMPENSATION,cathy.lilly@bfrisk.com,(855)4267452 ext.,() ext.,
+Berkshire Hathaway Homestate Companies,Jenny Bejarano,CL Underwriter,WORKERS COMPENSATION,jenny.bejarano@bfrisk.com,(855)4267452 ext.,() ext.,
+Berkshire Hathaway Homestate Companies,Rebecca Mills,CL Underwriter,WORKERS COMPENSATION,rebecca.mills@bfrisk.com,(855)4267452 ext.,() ext.,
+Burns Wilcox,Allie Krouse,Casualty Underwriter,Commercial Lines,akrouse@burnsandwilcox.com,(817)6954600 ext.,() ext.,
+Burns Wilcox,John Shearin,Casualty Underwriter,Commercial Lines,jshearin@burnsandwilcox.com,(713)8634988 ext.,() ext.,
+Burns Wilcox,James Gibson,CL Underwriter,Commercial Lines,jgibson@burnsandwilcox.com,(817)6954600 ext.,() ext.,
+Burns Wilcox,Mireya Melendez,CL Underwriter,Commercial Lines,mmelendez@burnsandwilcox.com,(281)8762600 ext.,() ext.,
+Burns Wilcox,Katy Hawkins,Property Underwriter,Commercial Lines,khawkins@burnsandwilcox.com,(817)6954600 ext.,() ext.,
+Burns Wilcox,Kimberly Giddens,Property Underwriter,Commercial Lines,kgiddens@burnsandwilcox.com,(817)6954600 ext.,() ext.,
+Canal Insurance Company,Canal Notifications,Comm Notifications,Commercial Lines,policy@canin.com,() ext.,() ext.,
+Capacity Coverage Company,Bonnie Greenwood,CL Underwriter,Commercial Lines,bonnie@clorisins.com,(631)4601122 ext.,() ext.,
+Capitol Indemnity Corp.,John Harness,CL Underwriter,Commercial Lines,john.harness@cnasurety.com,(512)8283320 ext.,() ext.,
+Capitol Indemnity Corp.,Jennifer Chastain,CL Underwriter,Commercial Lines,jennifer.chastain@cnasurety.com,(512)8283379 ext.,() ext.,
+Capitol Indemnity Corp.,David Dolan,COMM AUTO UW,Commercial Lines,david.dolan@cnasurety.com,(800)7213320 ext.,() ext.,
+Century Insurance Group,George Remy,CL Underwriter,Commercial Lines,gremy@century-ins.com,(713)5336870 ext.,() ext.,
+Century Insurance Group,Dora Arredondo,Comm Notifications,Commercial Lines,doraarredondo@century-ins.com,(713)5336870 ext.,() ext.,
+CNA Surety,Donna Sanguinetti,BOND UNDERWRITER,Commercial Lines,donna.sanguinetti@cnasurety.com,(713)2633700 ext.,() ext.,
+CRC Group,Brooke Howard,CL Underwriter,Commercial Lines,bhoward@crcgroup.com,(940)5655551 ext.,() ext.,
+CRC Group,Sam Clurman,CL Underwriter,Commercial Lines,sam.clurman@crcgroup.com,(713)7829717 ext.,() ext.,
+CRC Group,Sarah Hamway,CL Underwriter,Commercial Lines,shamway@crcgroup.com,(713)7829717 ext.,() ext.,
+CRC Group,Ted Matthews,CL Underwriter,Commercial Lines,tmatthews@crcgroup.com,(713)7829717 ext.,() ext.,
+CRC Group,Cecilia Garza,PL Underwriter,Personal Lines,cgarza@crcgroup.com,(713)7829795 ext.,() ext.,
+CRC Group,Jean Rodriguez,PL Underwriter,Personal Lines,jean.rodriguez@crcgroup.com,(713)7829717 ext.,() ext.,
+CRC Group,Jennifer McLelland,PL Underwriter Mgr,Personal Lines,jmclelland@crcgroup.com,(713)7829717 ext.,() ext.,
+Cypress Property and Casualty,Jody Wright,PL Underwriter,Personal Lines,jwright@cypressig.com,(904)2898801 ext.,() ext.,
+Cypress Property and Casualty,CYPRESS NOTIFICATIONS,PL Notifications,Personal Lines,policy@cypressig.com,() ext.,() ext.,
+Distinguished Program Group,Anne King,CL Underwriter,Commercial Lines,aking@distinguished.com,(212)7328000 ext.,() ext.,
+Distinguished Program Group,Jessica McQuone,CL Underwriter,Commercial Lines,jmcquone@distinguished.com,(212)7328000 ext.,() ext.,
+Distinguished Program Group,Nancy Tinnemeyer,CL Underwriter,Commercial Lines,ntinnemeyer@distinguished.com,(212)7328000 ext.,() ext.,
+Employers Mutual Casualty Company,EMC Notifications,Comm Notifications,Commercial Lines,EMCNOTIFICATION@EMCINS.COM,(515)2805588 ext.,() ext.,
+Employers Mutual Casualty Company,Nick Sheehan,CL Underwriter,Commercial Lines,NSHEEHAN@EMCINS.COM,(281)7197300 ext.,() ext.,
+Employers Mutual Casualty Company,Robert Reding,CL Underwriter,Commercial Lines,RREDING@EMCINS.COM,(515)2805554 ext.,() ext.,
+Encompass Insurance Company,Encompass Notifications,PL Notifications,Personal Lines,notifications@encompass.com,(847)3577600 ext.,() ext.,
+Encompass Insurance Company,Wendy Donohoe,PL Underwriter,,wdonohoe@encompass.com,(713)7779669 ext.,() ext.,
+Euroguard,Euroguard Notifications,Comm Notifications,Commercial Lines,notification@euroguardins.com,() ext.,() ext.,
+FIG Specialty,Paul Wilson,CL Underwriter,Commercial Lines,pwilson@fgicorp.com,(713)5265100 ext.,(713)5265100 ext.,
+First Choice Insurance Intermediaries,Christi Saathoff,PL Underwriter,Personal Lines,csaathoff@fcins.com,(972)4079099 ext.,() ext.,
+Foremost Insurance Group,Foremost Notifications,PL Notifications,Personal Lines,foremost.notifications@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Daniel Powell,PL Underwriter,,daniel.powell@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Emily Yin,PL Underwriter,,emily.yin@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Foremost SUI UW,PL Underwriter,,foremost.sui.uw@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Renee Davis,PL Underwriter,,renee.davis@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Uriah Holguin,PL Underwriter,,uriah.holguin@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,Victoria Johnson,PL Underwriter,,victoria.johnson@foremost.com,(616)9562280 ext.,() ext.,
+Foremost Insurance Group,William Reitan,PL Underwriter,,william.reitan@foremost.com,(616)9562280 ext.,() ext.,
+Franklin Mutual,Franklin Mutual Notifications,PL Notifications,Personal Lines,underwriting@franklinmutual.com,(609)3864600 ext.,() ext.,
+Galveston Insurance Associates,Tommy Ellis,CL Underwriter,Commercial Lines,tommye@galvestonins.com,(409)7631721 ext.,() ext.,
+Geovera Insurance Holdings Ltd.,Geovera Notifications,PL Notifications,Personal Lines,UnderwritingSupport@geovera.com,(866)2900716 ext.,() ext.,
+Global Indemnity Group Inc.,Rachel MHI,PL Underwriter,Personal Lines,RMHI@GLOBALINDEMNITY.COM,(610)6483810 ext.,() ext.,
+Golden Bear Insurance,Mary Turek,CL Underwriter,Commercial Lines,mary.turek@goldenbear.com,(800)6270359 ext.,() ext.,
+GoosHead,Goosehead Notifications,PL Notifications,Personal Lines,donotreply@goosehead.com,() ext.,() ext.,
+Great American Insurance Group,Great American Notification,Comm Notifications,Commercial Lines,notifications@gaig.com,(513)3695000 ext.,() ext.,
+Great American Insurance Group,Heather Andrews,CL Underwriter,Commercial Lines,handrews@gaig.com,(513)3695000 ext.,() ext.,
+Great American Insurance Group,Tim Pedersen,CL Underwriter,Commercial Lines,tpedersen@gaig.com,(513)3695000 ext.,() ext.,
+Hallmark Insurance Company,Hallmark Notifications,Comm Notifications,Commercial Lines,notifications@hallmarkgrp.com,(682)3125152 ext.,() ext.,
+Hallmark Insurance Company,Jennifer Larsen,CL Underwriter,Commercial Lines,jennifer.larsen@hallmarkgrp.com,(817)3487700 ext.,() ext.,
+Hallmark Insurance Company,Mike Moffatt,CL Underwriter,Commercial Lines,mike.moffatt@hallmarkgrp.com,(682)3125152 ext.,() ext.,
+Hanover Lloyd Insurance Company,Heather Morfoot,PL Underwriter,Personal Lines,heather.morfoot@hlico.com,(800)2925633 ext.,() ext.,
+Hanover Lloyd Insurance Company,Hanover Lloyd Notifications,PL Notifications,Personal Lines,policy@hlico.com,(800)2925633 ext.,() ext.,
+Hartford Fire Insurance Company,Hartford Notifications,Comm Notifications,Commercial Lines,directwebhelp@thehartford.com,() ext.,() ext.,
+Hartford Fire Insurance Company,Barbara Berg,CL Underwriter,Commercial Lines,barbara.berg@thehartford.com,(214)2815118 ext.,() ext.,
+Hartford Fire Insurance Company,Fran Babicz,CL Underwriter,Commercial Lines,frances.babicz@thehartford.com,(214)2815118 ext.,() ext.,
+Hartford Fire Insurance Company,Jerome Nash,CL Underwriter,Commercial Lines,jerome.nash@thehartford.com,(303)8675600 ext.,() ext.,
+Hartford Fire Insurance Company,Kathy Gray,CL Underwriter,Commercial Lines,kathy.gray@thehartford.com,() ext.,() ext.,
+Higginbotham-FFIW,Higginbotham Notifications,PL Notifications,Personal Lines,NOTIFICATIONS@FFIW.NET,() ext.,() ext.,
+HomeServices Insurance,Melissa Langford,PL Underwriter,Personal Lines,melissalangford@homeservices.com,(469)5499900 ext.,() ext.,
+Hull and Company Inc.,Jennifer Strickland,CL Underwriter,Commercial Lines,jstrickland@hullco.com,(972)9600288 ext.,() ext.,
+Hull and Company Inc.,Karen Webb,PL Underwriter Mgr,Personal Lines,kwebb@hullco.com,(972)9600288 ext.,() ext.,
+Imperial PFS,Imperial PFS Notifications,Comm Notifications,Commercial Lines,service@ipfs.com,(800)9334842 ext.,() ext.,
+Inland Specialty Underwriters,Inland Specialty Notifications,Comm Notifications,Commercial Lines,info@inlandspec.com,(972)9200100 ext.,() ext.,
+Insurors Indemnity,Insurors Indemnity Notifications,Comm Notifications,Commercial Lines,notifications@insurorsindemnity.com,(972)7010022 ext.,() ext.,
+Insurors Indemnity,Marlene Quintana,CL Underwriter,Commercial Lines,marlene.quintana@insurorsindemnity.com,(972)7010022 ext.,() ext.,
+James River Insurance Company,James River Notifications,Comm Notifications,Commercial Lines,notifications@jamesriverins.com,(804)2895200 ext.,() ext.,
+James River Insurance Company,Christine Purcell,CL Underwriter,Commercial Lines,cpurcell@jamesriverins.com,(804)2895200 ext.,() ext.,
+James River Insurance Company,Dave Jones,CL Underwriter,Commercial Lines,djones@jamesriverins.com,(804)2895200 ext.,() ext.,
+James River Insurance Company,Elizabeth Nelson,CL Underwriter,Commercial Lines,enelson@jamesriverins.com,(804)2895200 ext.,() ext.,
+Johnson Kendall Johnson,Joanna Pham,CL Underwriter,Commercial Lines,jpham@jkj.com,(713)8504800 ext.,() ext.,
+Johnson Kendall Johnson,S Perkins,CL Underwriter,Commercial Lines,sperkins@jkj.com,(713)8504800 ext.,() ext.,
+Kinsale Insurance Company,Kinsale Notifications,Comm Notifications,Commercial Lines,notifications@kinsaleins.com,(804)2892700 ext.,() ext.,
+Kinsale Insurance Company,DeMauri Franklin,CL Underwriter,Commercial Lines,dfranklin@kinsaleins.com,(804)2892700 ext.,() ext.,
+Kinsale Insurance Company,Evelyn Albrecht,CL Underwriter,Commercial Lines,ealbrecht@kinsaleins.com,(804)2892700 ext.,() ext.,
+Kinsale Insurance Company,Marc Obermeyer,CL Underwriter,Commercial Lines,mobermeyer@kinsaleins.com,(804)2892700 ext.,() ext.,
+Lexington Insurance Company,Lexington Notifications,Comm Notifications,Commercial Lines,lexington.notifications@lexingtoninsurance.com,(617)3307500 ext.,() ext.,
+Liberty Mutual,Liberty Mutual Notifications,Comm Notifications,Commercial Lines,commerciallines@libertymutual.com,(617)3573456 ext.,() ext.,
+Liberty Mutual,Andrew Giordano,CL Underwriter,Commercial Lines,andrew.giordano@libertymutual.com,(617)3573456 ext.,() ext.,
+Liberty Mutual,Chris Cambell,CL Underwriter,Commercial Lines,chris.campbell@libertymutual.com,(617)3573456 ext.,() ext.,
+Liberty Mutual,Celia Garcia,PL Underwriter,Personal Lines,celia.garcia@libertymutual.com,(617)3573456 ext.,() ext.,
+Lloyds of London,Lloyds Notifications,Comm Notifications,Commercial Lines,notifications@lloyds.com,(020)73277100 ext.,() ext.,
+M.J. Hall and Company Inc.,MJ Hall Notifications,Comm Notifications,Commercial Lines,mjhall.notifications@mjhall.com,(909)9841010 ext.,() ext.,
+M.J. Hall and Company Inc.,Elizabeth M. Davies,CL Underwriter,Commercial Lines,edavies@mjhall.com,(909)9841010 ext.,() ext.,
+M.J. Hall and Company Inc.,Andrew Lamoreaux,Property Underwriter,Commercial Lines,alamoreaux@mjhall.com,(909)9841010 ext.,() ext.,
+Mapfre Insurance,Mapfre Notifications,PL Notifications,Personal Lines,notifications@mapfreinsurance.com,(508)8852000 ext.,() ext.,
+Markel Specialty Commercial,Markel Notifications,Comm Notifications,Commercial Lines,notifications@markel.com,(804)7470136 ext.,() ext.,
+Markel Specialty Commercial,Cereda Vaughn,CL Underwriter,Commercial Lines,cvaughn@markel.com,(804)7470136 ext.,() ext.,
+Markel Specialty Commercial,Chris Krone,CL Underwriter,Commercial Lines,ckrone@markel.com,(804)7470136 ext.,() ext.,
+Markel Specialty Commercial,Jeffrey S. Ward,CL Underwriter,Commercial Lines,jward@markel.com,(804)7470136 ext.,() ext.,
+Markel Specialty Commercial,Kristina Freeze,CL Underwriter,Commercial Lines,kfreeze@markel.com,(804)7470136 ext.,() ext.,
+Mid-Continent Casualty Company,Mid-Continent Notifications,Comm Notifications,Commercial Lines,notifications@midcont.com,(918)5877000 ext.,() ext.,
+Midlands Management,Midlands Notifications,Comm Notifications,Commercial Lines,notifications@midlandsmanagement.com,(913)4899255 ext.,() ext.,
+Midlands Management,Shaun Shenouda,CL Underwriter,Commercial Lines,sshenouda@midlandsmanagement.com,(913)4899255 ext.,() ext.,
+Monarch E and S Insurance Services,Monarch Notifications,Comm Notifications,Commercial Lines,notifications@monarchexcess.com,(805)3823300 ext.,() ext.,
+Monarch E and S Insurance Services,Micheal Del Georgio,CL Underwriter,Commercial Lines,mdelgeorgio@monarchexcess.com,(805)3823300 ext.,() ext.,
+Monarch E and S Insurance Services,Miriam Estrada,CL Underwriter,Commercial Lines,mestrada@monarchexcess.com,(805)3823300 ext.,() ext.,
+Nationwide Mutual Insurance Company,Nationwide Notifications,Comm Notifications,Commercial Lines,notifications@nationwide.com,(877)6692436 ext.,() ext.,
+Nationwide Mutual Insurance Company,Nathan Coomes,CL Underwriter,Commercial Lines,coomen@nationwide.com,(877)6692436 ext.,() ext.,
+Nautilus Insurance Company,Nautilus Notifications,Comm Notifications,Commercial Lines,notifications@nautilusinsgroup.com,(480)9515550 ext.,() ext.,
+Nautilus Insurance Company,Tammy Vaughn,CL Underwriter,Commercial Lines,tvaughn@nautilusinsgroup.com,(480)9515550 ext.,() ext.,
+NFIP,NFIP Notifications,PL Notifications,Personal Lines,nfip.notifications@fema.dhs.gov,() ext.,() ext.,
+Normandy Harbor Insurance Company,Normandy Notifications,Comm Notifications,Commercial Lines,normandy.notifications@normandyins.com,(800)2253575 ext.,() ext.,
+Normandy Harbor Insurance Company,Nicole Porter,CL Underwriter,Commercial Lines,nporter@normandyins.com,(800)2253575 ext.,() ext.,
+OAIC,OAIC Notifications,Comm Notifications,Commercial Lines,notifications@oaic.com,() ext.,() ext.,
+OAIC,Ariel Dunn,CL Underwriter,Commercial Lines,adunn@oaic.com,() ext.,() ext.,
+OAIC,Mark R Hart,CL Underwriter,Commercial Lines,mhart@oaic.com,() ext.,() ext.,
+Old Republic Surety Company,Old Republic Notifications,Comm Notifications,Commercial Lines,notifications@orsurety.com,(262)7900531 ext.,() ext.,
+Pacific Specialty Insurance Company,Pacific Specialty Notifications,PL Notifications,Personal Lines,notifications@pacspec.com,(800)4087335 ext.,() ext.,
+Palomar Specialty Insurance Company,Palomar Notifications,Comm Notifications,Commercial Lines,notifications@palomarspecialty.com,(619)5676700 ext.,() ext.,
+Pennsylvania Lumbermans Mutual,PLM Notifications,Comm Notifications,Commercial Lines,notifications@plmins.com,(267)8250500 ext.,() ext.,
+Philadelphia Insurance Companies,Philadelphia Notifications,Comm Notifications,Commercial Lines,notifications@phly.com,(800)7659749 ext.,() ext.,
+Philadelphia Insurance Companies,Sonja Lockhart,CL Underwriter,Commercial Lines,slockhart@phly.com,(800)7659749 ext.,() ext.,
+ProAssurance,ProAssurance Notifications,Comm Notifications,Commercial Lines,notifications@proassurance.com,(205)8772600 ext.,() ext.,
+Progressive Insurance,Progressive Notifications,PL Notifications,Personal Lines,notifications@progressive.com,(440)4615000 ext.,() ext.,
+QBE North America,QBE Notifications,Comm Notifications,Commercial Lines,notifications@us.qbe.com,(212)4227200 ext.,() ext.,
+RLI Corp,RLI Notifications,Comm Notifications,Commercial Lines,notifications@rlicorp.com,(309)6922000 ext.,() ext.,
+RLI Corp,Jen Halland,CL Underwriter,Commercial Lines,jhalland@rlicorp.com,(309)6922000 ext.,() ext.,
+RSUI Indemnity Company,RSUI Notifications,Comm Notifications,Commercial Lines,notifications@rsui.com,(404)2317000 ext.,() ext.,
+RSUI Indemnity Company,Maria Maldonado,CL Underwriter,Commercial Lines,mmaldonado@rsui.com,(404)2317000 ext.,() ext.,
+Ryan Specialty Group,Ryan Specialty Notifications,Comm Notifications,Commercial Lines,notifications@ryansg.com,(312)7847100 ext.,() ext.,
+Safeco Insurance,Safeco Notifications,PL Notifications,Personal Lines,notifications@safeco.com,(800)3323226 ext.,() ext.,
+Safety Insurance Company,Safety Insurance Notifications,PL Notifications,Personal Lines,notifications@safetyinsurance.com,(617)9512600 ext.,() ext.,
+SCOTTSDALE INSURANCE COMPANY,Scottsdale Notifications,Comm Notifications,Commercial Lines,notifications@scottsdaleins.com,(480)3654000 ext.,() ext.,
+Seneca Insurance Company,Seneca Notifications,Comm Notifications,Commercial Lines,notifications@senecainsurance.com,(212)3381000 ext.,() ext.,
+Southern Cross Underwriters,Southern Cross Notifications,Comm Notifications,Commercial Lines,notifications@scu-ins.com,(713)9528500 ext.,() ext.,
+Southern Cross Underwriters,I Aong,CL Underwriter,Commercial Lines,iaong@scu-ins.com,(713)9528500 ext.,() ext.,
+Specialty Program Group,SPG Notifications,Comm Notifications,Commercial Lines,notifications@spgga.com,(704)6437800 ext.,() ext.,
+State Auto Insurance Companies,State Auto Notifications,Comm Notifications,Commercial Lines,notifications@stateauto.com,(614)4645000 ext.,() ext.,
+Summit Holdings,Summit Notifications,Comm Notifications,Commercial Lines,notifications@summitholdings.com,(863)6815777 ext.,() ext.,
+SwissRE,SwissRE Notifications,Comm Notifications,Commercial Lines,notifications@swissre.com,(914)8288000 ext.,() ext.,
+Texas Builders Insurance Company,Texas Builders Notifications,Comm Notifications,Commercial Lines,notifications@tbic.com,(512)4743200 ext.,() ext.,
+Texas Fair Plan Association,Texas Fair Plan Notifications,PL Notifications,Personal Lines,notifications@texasfairplan.org,(512)3222284 ext.,() ext.,
+Texas Mutual Insurance Company,Texas Mutual Notifications,Comm Notifications,Commercial Lines,notifications@texasmutual.com,(512)2243800 ext.,() ext.,
+Texas Windstorm Insurance Association,TWIA Notifications,PL Notifications,Personal Lines,notifications@twia.org,(512)8994962 ext.,() ext.,
+The Hanover Insurance Group,Hanover Notifications,Comm Notifications,Commercial Lines,notifications@hanover.com,(508)8550000 ext.,() ext.,
+The Hanover Insurance Group,Bill Mecklenburg,CL Underwriter,Commercial Lines,bmecklenburg@hanover.com,(508)8550000 ext.,() ext.,
+The Hanover Insurance Group,Bob Havey,CL Underwriter,Commercial Lines,bhavey@hanover.com,(508)8550000 ext.,() ext.,
+The Zenith,Zenith Notifications,Comm Notifications,Commercial Lines,notifications@thezenith.com,(818)7132000 ext.,() ext.,
+Tokio Marine HCC,Tokio Marine Notifications,Comm Notifications,Commercial Lines,notifications@tmhcc.com,(281)8789292 ext.,() ext.,
+Travelers Insurance Co.,Brian L. Morris,CL Underwriter,Commercial Lines,blmorris@travelers.com,(214)5706621 ext.,() ext.,
+Travelers Insurance Co.,Kim Rimorin,CL Underwriter,Small business unit,krimorin@travelers.com,(214)5706255 ext.,() ext.,
+Travelers Insurance Co.,Rosie Reyes- CL & Select,CL Underwriter,Commercial Lines,rareyes@travelers.com,(214)5706341 ext.,() ext.,
+Travelers Insurance Co.,Notifications Travelers,Comm Notifications,Commercial Lines,AFTHQEML@travelers.com,() ext.,() ext.,
+Travelers Insurance Co.,Lisa Breeland,Personal Lines,Personal Lines,lbreelan@travelers.com,(281)3792922 ext.,(832)7411881 ext.,
+Trinity Underwriting Managers Inc.,Gene Cain,Commercial Lines,Commercial Lines,gcain@tumi-ins.com,() ext.,() ext.,
+Trinity Underwriting Managers Inc.,Jason Barlow,TRANSPORTATION UW,Commercial Lines,jason@tumi-ins.com,() ext.,(912)4507500 ext.,
+Trinity Underwriting Managers Inc.,Marlene Sinclair,TRANSPORTATION UW,Commercial Lines,marlene@tumi-ins.com,(912)4507500 ext.,() ext.,
+TWFG (The Woodlands Financial Group),Brooke Johnson,PL Notifications,Personal Lines,brooke@twfg.com,() ext.,() ext.,
+TWFG (The Woodlands Financial Group),D Teran,PL Notifications,Personal Lines,agentinfo@twfg.com,() ext.,() ext.,
+TWFG (The Woodlands Financial Group),TWFG Notifications,PL Notifications,Personal Lines,noreply@twfg.com,() ext.,() ext.,
+U.S. RISK Inc.,Jackie Baca,CL Underwriter,Commercial Lines,jackieb@usrisk.com,() ext.,(281)2494916 ext.,
+U.S. RISK Inc.,Kyle Richburg,CL Underwriter,Commercial Lines,kyler@usrisk.com,(281)2494913 ext.,(281)2494900 ext.,
+United States Liability Insurance (USLI),David Bowman,CL Underwriter,Commercial Lines,dbowman@usli.com,(888)8754450 ext. 7404,() ext.,
+United States Liability Insurance (USLI),India Gravitt,CL Underwriter,Commercial Lines,igravitt@usli.com,(888)8754450 ext. 7408,() ext.,
+United States Liability Insurance (USLI),USLI Notifications,Comm Notifications,Commercial Lines,news@usli.com,() ext.,() ext.,
+UTICA,Becky Barnett,CL Underwriter,Commercial Lines,becky.barnett@uticanational.com,(972)6776742 ext.,() ext.,
+VacantExpress.com,Angela Seaman,CL Underwriter,Underwriting,aseaman@jhferg.com,(800)3103351 ext.,() ext.,
+Velocity Risk Underwriters LLC,Mark Skopal,PL Underwriter Mgr,,mskopal@velocityrisk.com,(615)2190533 ext.,(615)5965060 ext.,
+Wright Flood (Fidelity National),Notifications,Comm Notifications,Commercial Lines,floodmarketing@weareflood.com,() ext.,() ext.,
+WSG Specialty Underwriters,Jessica Garza,CL Underwriter,Commercial Lines,jessica@wilsonsmithgroup.com,(713)8089770 ext. 107,() ext.,
+WSG Specialty Underwriters,Shanna Pyle,PL Underwriter,,shanna@wilsonsmithgroup.com,() ext.,() ext.,
+WSG Specialty Underwriters,Anthony Whited,PL Underwriter Mgr,Personal Lines,anthony.whited@wilsonsmithgroup.com,(713)8089770 ext.,(832)8405136 ext.,
+WSG Specialty Underwriters,Jennifer Hauser,PL Underwriter Mgr,Personal Lines,jennifer.hauser@wilsonsmithgroup.com,(713)8089770 ext.,() ext.,
+WSG Specialty Underwriters,Jennifer Mackay,Property Underwriter,Commercial Lines,jennifer.mackay@wilsonsmithgroup.com,() ext.,() ext.,
+XPT Partners LLC,Denise Rodriguez,CL Underwriter,Personal Line,denise.rodriguez@xptspecialty.com,(713)4001146 ext.,() ext.,
+Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,builders.risk@usassure.com,() ext.,() ext.,`;
+
+        function parseCSV(csv) {
+            const lines = csv.trim().split('\n');
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                if (values.length >= 5) {
+                    data.push({
+                        company: values[0] || '',
+                        name: values[1] || '',
+                        position: values[2] || '',
+                        department: values[3] || '',
+                        email: values[4] || '',
+                        phone: values[5] || '',
+                        cell: values[6] || '',
+                        fax: values[7] || ''
+                    });
+                }
+            }
+            return data;
+        }
+
+        function isPersonalLines(position) {
+            const plKeywords = ['PL', 'Personal Lines', 'Personal Line'];
+            return plKeywords.some(keyword => position.toUpperCase().includes(keyword.toUpperCase()));
+        }
+
+        function isCommercialLines(position) {
+            const clKeywords = ['CL', 'Commercial', 'Comm ', 'Casualty', 'STANDARD LINES', 'Property Underwriter', 'BUILDERS RISK', 'PROFESSIONAL LIAB', 'TRANSPORTATION UW', 'BOND UNDERWRITER', 'COMM AUTO'];
+            return clKeywords.some(keyword => position.toUpperCase().includes(keyword.toUpperCase()));
+        }
+
+        let allData = [];
+        let plCompanies = {};
+        let clCompanies = {};
+        let currentType = '';
+        let currentCompany = '';
+
+        function initData() {
+            allData = parseCSV(csvData);
+            allData.forEach(contact => {
+                if (isPersonalLines(contact.position)) {
+                    if (!plCompanies[contact.company]) plCompanies[contact.company] = [];
+                    plCompanies[contact.company].push(contact);
+                }
+                if (isCommercialLines(contact.position)) {
+                    if (!clCompanies[contact.company]) clCompanies[contact.company] = [];
+                    clCompanies[contact.company].push(contact);
+                }
+            });
+
+            document.getElementById('plCompanyCount').textContent = Object.keys(plCompanies).length;
+            document.getElementById('plContactCount').textContent = Object.values(plCompanies).reduce((sum, arr) => sum + arr.length, 0);
+            document.getElementById('clCompanyCount').textContent = Object.keys(clCompanies).length;
+            document.getElementById('clContactCount').textContent = Object.values(clCompanies).reduce((sum, arr) => sum + arr.length, 0);
+        }
+
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+        }
+
+        function goHome() {
+            showView('homeView');
+            currentType = '';
+            currentCompany = '';
+        }
+
+        function goBackToCompanies() {
+            showView('companyListView');
+            currentCompany = '';
+            document.getElementById('contactSearch').value = '';
+        }
+
+        function showCompanyList(type) {
+            currentType = type;
+            const companies = type === 'PL' ? plCompanies : clCompanies;
+            const badge = document.getElementById('companyListBadge');
+            badge.textContent = type === 'PL' ? 'Personal Lines' : 'Commercial Lines';
+            badge.className = 'section-badge ' + type.toLowerCase();
+            document.getElementById('companyListTitle').textContent = `Select a Carrier (${Object.keys(companies).length})`;
+            document.getElementById('companySearch').value = '';
+            renderCompanyGrid(companies);
+            showView('companyListView');
+        }
+
+        function renderCompanyGrid(companies) {
+            const grid = document.getElementById('companyGrid');
+            const sortedCompanies = Object.keys(companies).sort();
+            if (sortedCompanies.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><p>No carriers found</p></div>';
+                return;
+            }
+            grid.innerHTML = sortedCompanies.map(company => `
+                <div class="company-card ${currentType.toLowerCase()}" onclick="showContacts('${company.replace(/'/g, "\\'")}')">
+                    <h3>${company}</h3>
+                    <div class="contact-count">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        ${companies[company].length} contact${companies[company].length > 1 ? 's' : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterCompanies() {
+            const searchTerm = document.getElementById('companySearch').value.toLowerCase();
+            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const filtered = {};
+            Object.keys(companies).forEach(company => {
+                if (company.toLowerCase().includes(searchTerm)) filtered[company] = companies[company];
+            });
+            renderCompanyGrid(filtered);
+        }
+
+        function showContacts(company) {
+            currentCompany = company;
+            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const contacts = companies[company] || [];
+            document.getElementById('selectedCompanyName').textContent = company;
+            document.getElementById('contactCountText').textContent = `${contacts.length} Contact${contacts.length > 1 ? 's' : ''}`;
+            renderContactGrid(contacts);
+            showView('contactView');
+        }
+
+        function renderContactGrid(contacts) {
+            const grid = document.getElementById('contactGrid');
+            if (contacts.length === 0) {
+                grid.innerHTML = '<div class="empty-state"><p>No contacts found</p></div>';
+                return;
+            }
+            grid.innerHTML = contacts.map(contact => {
+                const initials = contact.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+                const cleanPhone = contact.phone && contact.phone !== '() ext.' ? contact.phone : '';
+                const cleanCell = contact.cell && contact.cell !== '() ext.' ? contact.cell : '';
+                const cleanFax = contact.fax || '';
+                return `
+                    <div class="contact-card ${currentType.toLowerCase()}">
+                        <div class="contact-header">
+                            <div class="contact-avatar">${initials}</div>
+                            <div class="contact-info">
+                                <h4>${contact.name}</h4>
+                                <div class="position">${contact.position}</div>
+                                ${contact.department ? `<span class="department">${contact.department}</span>` : ''}
+                            </div>
+                        </div>
+                        <div class="contact-details">
+                            ${contact.email ? `<div class="detail-row"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg><a href="mailto:${contact.email}">${contact.email}</a></div>` : ''}
+                            ${cleanPhone ? `<div class="detail-row"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" /></svg><span>${cleanPhone}</span></div>` : ''}
+                            ${cleanCell ? `<div class="detail-row"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg><span>${cleanCell}</span></div>` : ''}
+                            ${cleanFax ? `<div class="detail-row"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" /></svg><span>Fax: ${cleanFax}</span></div>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function filterContacts() {
+            const searchTerm = document.getElementById('contactSearch').value.toLowerCase();
+            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const allContacts = companies[currentCompany] || [];
+            const filtered = allContacts.filter(contact => 
+                contact.name.toLowerCase().includes(searchTerm) ||
+                contact.position.toLowerCase().includes(searchTerm) ||
+                contact.department.toLowerCase().includes(searchTerm) ||
+                contact.email.toLowerCase().includes(searchTerm)
+            );
+            renderContactGrid(filtered);
+        }
+
+        document.addEventListener('DOMContentLoaded', initData);
+    </script>
 </body>
 </html>
