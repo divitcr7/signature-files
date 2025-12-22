@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Benchmark Onboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --accent: #d4a853;
+            --muted: #6b7280;
+            --white: #ffffff;
+            --border: #e5e7eb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #f7f5ef 0%, #eef2f8 100%);
+            min-height: 100vh;
+            color: var(--primary);
+        }
+
+        .home-link {
+            position: fixed;
+            top: 24px;
+            left: 24px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(30, 58, 95, 0.12);
+            transition: transform 0.3s ease;
+        }
+
+        .home-link:hover {
+            transform: translateY(-2px);
+        }
+
+        .page {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+        }
+
+        .badge {
+            display: inline-flex;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(212, 168, 83, 0.15);
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.85rem;
+            margin-bottom: 26px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            margin-bottom: 16px;
+        }
+
+        .lede {
+            font-size: 1.05rem;
+            color: var(--muted);
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .placeholder-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+            border: 1px solid rgba(30, 58, 95, 0.08);
+            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.08);
+        }
+
+        .placeholder-card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+
+        .placeholder-card ul {
+            list-style: none;
+            color: var(--muted);
+            line-height: 1.6;
+            padding-left: 0;
+        }
+
+        .placeholder-card li::before {
+            content: '▹';
+            margin-right: 8px;
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <a class="home-link" href="index.html">← Back to Hub</a>
+    <main class="page">
+        <span class="badge">About us</span>
+        <h1>Meet Benchmark</h1>
+        <p class="lede">This page will introduce the founding story, the markets we serve, and the team members that keep Benchmark moving. Think of it as the first chapter in every teammate's journey.</p>
+
+        <div class="placeholder-card">
+            <h2>Coming soon</h2>
+            <ul>
+                <li>Origin story timeline &amp; leadership bios</li>
+                <li>Mission, vision, values with real-world examples</li>
+                <li>Interactive office/location map</li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>
