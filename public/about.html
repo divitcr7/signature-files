@@ -8,21 +8,19 @@
     <style>
         :root {
             --primary: #1e3a5f;
+            --primary-soft: #2d5a8a;
             --accent: #d4a853;
             --muted: #6b7280;
             --white: #ffffff;
             --border: #e5e7eb;
+            --shadow: 0 24px 55px rgba(30, 58, 95, 0.15);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'DM Sans', sans-serif;
-            background: linear-gradient(135deg, #f7f5ef 0%, #eef2f8 100%);
+            background: radial-gradient(circle at top, #f7f5ef 0%, #eef2f8 55%, #e5ebf4 100%);
             min-height: 100vh;
             color: var(--primary);
         }
@@ -39,15 +37,12 @@
             color: var(--primary);
             text-decoration: none;
             box-shadow: 0 10px 25px rgba(30, 58, 95, 0.12);
-            transition: transform 0.3s ease;
         }
 
-        .home-link:hover {
-            transform: translateY(-2px);
-        }
+        .home-link:hover { transform: translateY(-2px); }
 
-        .page {
-            max-width: 860px;
+        main {
+            max-width: 1100px;
             margin: 0 auto;
             padding: 120px 20px 80px;
         }
@@ -66,7 +61,7 @@
 
         h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
+            font-size: 3rem;
             margin-bottom: 16px;
         }
 
@@ -74,51 +69,282 @@
             font-size: 1.05rem;
             color: var(--muted);
             line-height: 1.6;
-            margin-bottom: 24px;
+            max-width: 720px;
+            margin-bottom: 36px;
         }
 
-        .placeholder-card {
+        .story-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 28px;
+            border-radius: 28px;
+            padding: 32px;
             border: 1px solid rgba(30, 58, 95, 0.08);
-            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.08);
+            box-shadow: var(--shadow);
+            margin-bottom: 60px;
         }
 
-        .placeholder-card h2 {
+        .story-card h2 {
             font-size: 1.5rem;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
         }
 
-        .placeholder-card ul {
+        .story-card ul {
             list-style: none;
             color: var(--muted);
             line-height: 1.6;
-            padding-left: 0;
         }
 
-        .placeholder-card li::before {
+        .story-card li::before {
             content: '▹';
             margin-right: 8px;
             color: var(--accent);
+        }
+
+        .team-section {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 32px;
+            padding: 40px;
+            border: 1px solid rgba(30, 58, 95, 0.08);
+            box-shadow: var(--shadow);
+        }
+
+        .team-header {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            margin-bottom: 32px;
+            justify-content: space-between;
+        }
+
+        .team-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .team-header p {
+            color: var(--muted);
+            max-width: 560px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .profile-card {
+            display: flex;
+            gap: 14px;
+            padding: 18px;
+            border-radius: 18px;
+            border: 1px solid rgba(30, 58, 95, 0.08);
+            background: var(--white);
+            box-shadow: 0 12px 30px rgba(30, 58, 95, 0.08);
+            align-items: center;
+        }
+
+        .profile-card h4 {
+            font-size: 1rem;
+            margin-bottom: 4px;
+            color: var(--primary);
+        }
+
+        .profile-card .department {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        .profile-card .role {
+            font-size: 0.9rem;
+            color: var(--primary-soft);
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(212, 168, 83, 0.16);
+            color: var(--primary);
+            font-weight: 700;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        @media (max-width: 640px) {
+            main { padding: 100px 16px 60px; }
+            h1 { font-size: 2.4rem; }
+            .team-section { padding: 28px; }
         }
     </style>
 </head>
 <body>
     <a class="home-link" href="index.html">← Back to Hub</a>
-    <main class="page">
+    <main>
         <span class="badge">About us</span>
         <h1>Meet Benchmark</h1>
-        <p class="lede">This page will introduce the founding story, the markets we serve, and the team members that keep Benchmark moving. Think of it as the first chapter in every teammate's journey.</p>
+        <p class="lede">The Benchmark story blends entrepreneurial grit with deep carrier relationships. As we continue to document milestones, this page will grow into the definitive reference for who we are, what we stand for, and who is driving the mission forward.</p>
 
-        <div class="placeholder-card">
-            <h2>Coming soon</h2>
+        <div class="story-card">
+            <h2>What you'll find here soon</h2>
             <ul>
-                <li>Origin story timeline &amp; leadership bios</li>
-                <li>Mission, vision, values with real-world examples</li>
+                <li>Origin story timeline & leadership bios</li>
+                <li>Mission, vision, and values with real examples</li>
                 <li>Interactive office/location map</li>
             </ul>
         </div>
+
+        <section class="team-section" id="directory">
+            <div class="team-header">
+                <div>
+                    <span class="badge" style="margin-bottom:12px; display:inline-flex;">Organization directory</span>
+                    <h2>Meet the team keeping Benchmark running</h2>
+                    <p>Quick view of departments and roles so you know exactly who to tap for support. We will keep growing this list as new teammates join.</p>
+                </div>
+            </div>
+            <div class="team-grid">
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Jivar.png" alt="Jivar">
+                    </div>
+                    <div>
+                        <h4>Jivar Foty </h4>
+                        <div class="department">Management</div>
+                        <div class="role">Owner</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Wes.jpeg" alt="Wes">
+                    </div>
+                    <div>
+                        <h4>Wes</h4>
+                        <div class="department">Management</div>
+                        <div class="role">COO</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Hathem.png" alt="Haitham">
+                    </div>
+                    <div>
+                        <h4>Haitham Foty</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">Marketing</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Vik.png" alt="Vik">
+                    </div>
+                    <div>
+                        <h4>Bhavik Shah</h4>
+                        <div class="department">Accounting</div>
+                        <div class="role">Accountant</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Daniel.png" alt="Daniel Peralta">
+                    </div>
+                    <div>
+                        <h4>Daniel Peralta</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">Commercial Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Andrea.png" alt="Andrea Hernandez">
+                    </div>
+                    <div>
+                        <h4>Andrea Hernandez</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">Commercial Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Caleb.png" alt="Caleb McGlennen">
+                    </div>
+                    <div>
+                        <h4>Caleb McGlennen</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">Producer</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">MH</div>
+                    <div>
+                        <h4>Mitchell Hutchins</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">REO Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">JG</div>
+                    <div>
+                        <h4>Jennifer Garcia</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">Commercial Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">TL</div>
+                    <div>
+                        <h4>Tara Luke</h4>
+                        <div class="department">Commercial</div>
+                        <div class="role">REO Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">DP</div>
+                    <div>
+                        <h4>Divit Patidar</h4>
+                        <div class="department">IT</div>
+                        <div class="role">IT</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">SA</div>
+                    <div>
+                        <h4>Sakshi Ambadkar</h4>
+                        <div class="department">IT</div>
+                        <div class="role">IT</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">
+                        <img src="Kimberly.png" alt="Kimberly Ford">
+                    </div>
+                    <div>
+                        <h4>Kimberly Ford</h4>
+                        <div class="department">Personal</div>
+                        <div class="role">Personal Lines Account Manager</div>
+                    </div>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar">RL</div>
+                    <div>
+                        <h4>Robert Luna</h4>
+                        <div class="department">Personal</div>
+                        <div class="role">Personal Lines Account Manager</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 </body>
 </html>

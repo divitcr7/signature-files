@@ -7,11 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1e3a5f;
+            --primary: #10223b;
             --accent: #4cc9a7;
             --muted: #637086;
             --white: #ffffff;
-            --border: #cfe5de;
+            --border: #d7e2ea;
+            --shadow: 0 25px 60px rgba(16, 34, 59, 0.15);
+            --glass: rgba(255, 255, 255, 0.85);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -19,7 +21,7 @@
         body {
             font-family: 'DM Sans', sans-serif;
             min-height: 100vh;
-            background: linear-gradient(135deg, #f0fff7 0%, #edf4ff 100%);
+            background: radial-gradient(circle at top, #f0fff7 0%, #edf4ff 60%, #e6ecfb 100%);
             color: var(--primary);
         }
 
@@ -34,12 +36,16 @@
             font-weight: 600;
             color: var(--primary);
             text-decoration: none;
-            box-shadow: 0 10px 25px rgba(30, 58, 95, 0.12);
+            box-shadow: 0 10px 25px rgba(16, 34, 59, 0.12);
         }
 
         .home-link:hover { transform: translateY(-2px); }
 
-        .page { max-width: 860px; margin: 0 auto; padding: 120px 20px 80px; }
+        main {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 120px 20px 80px;
+        }
 
         .badge {
             display: inline-flex;
@@ -50,40 +56,404 @@
             text-transform: uppercase;
             letter-spacing: 0.12em;
             font-size: 0.85rem;
-            margin-bottom: 26px;
+            margin-bottom: 20px;
         }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 2.6rem; margin-bottom: 16px; }
-        .lede { font-size: 1.05rem; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+        h1 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 16px; }
+        .lede { font-size: 1.05rem; color: var(--muted); line-height: 1.6; margin-bottom: 40px; }
 
-        .placeholder-card {
+        .tool-intro {
+            background: var(--glass);
+            border-radius: 28px;
+            padding: 32px;
+            border: 1px solid rgba(16, 34, 59, 0.08);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .tool-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .tool-section p { color: var(--muted); margin-bottom: 24px; }
+
+        .tool-card {
             background: var(--white);
-            border-radius: 20px;
-            padding: 28px;
-            border: 1px solid rgba(30, 58, 95, 0.08);
-            box-shadow: 0 18px 40px rgba(30, 58, 95, 0.1);
+            border-radius: 24px;
+            border: 1px solid rgba(16, 34, 59, 0.08);
+            box-shadow: 0 20px 50px rgba(16, 34, 59, 0.08);
+            margin-bottom: 18px;
+            overflow: hidden;
         }
 
-        .placeholder-card h2 { font-size: 1.4rem; margin-bottom: 12px; }
-        .placeholder-card ul { list-style: none; color: var(--muted); line-height: 1.6; }
-        .placeholder-card li::before { content: '▹'; margin-right: 8px; color: var(--accent); }
+        .tool-head {
+            width: 100%;
+            background: transparent;
+            border: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px;
+            cursor: pointer;
+        }
+
+        .tool-head h3 {
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .tool-head span { color: var(--muted); font-size: 0.9rem; }
+
+        .chevron {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid rgba(16, 34, 59, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .tool-card.open .chevron { transform: rotate(90deg); }
+
+        .tool-body {
+            max-height: 0;
+            overflow: hidden;
+            border-top: 1px solid rgba(16, 34, 59, 0.05);
+            transition: max-height 0.35s ease;
+        }
+
+        .tool-card.open .tool-body { max-height: 600px; }
+
+        .tool-inner {
+            padding: 24px;
+            display: grid;
+            gap: 16px;
+        }
+
+        .tool-tabs {
+            display: inline-flex;
+            gap: 10px;
+            background: rgba(16, 34, 59, 0.04);
+            padding: 6px;
+            border-radius: 999px;
+            width:fit-content;
+        }
+
+        .tab-btn {
+            border: none;
+            background: transparent;
+            padding: 10px 18px;
+            border-radius: 999px;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .tab-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .tab-panel { display: none; color: var(--muted); line-height: 1.6; }
+        .tab-panel.active { display: block; }
+
+        ul { padding-left: 20px; margin: 0; }
+
+        @media (max-width: 640px) {
+            main { padding: 100px 16px 60px; }
+            h1 { font-size: 2.4rem; }
+        }
     </style>
 </head>
 <body>
     <a class="home-link" href="index.html">← Back to Hub</a>
-    <main class="page">
+    <main>
         <span class="badge">Tools at Benchmark</span>
-        <h1>The tech stack</h1>
-        <p class="lede">Logins, automations, data sources—this hub will outline everything you need to stay productive with Benchmark's tooling.</p>
+        <h1>Agency systems, simplified</h1>
+        <p class="lede">Our agency leverages industry platforms plus internal automations to keep clients, carriers, and teammates in sync. Click any tool to see the knowledge you need and exactly how it shows up in daily work.</p>
 
-        <div class="placeholder-card">
-            <h2>Planned sections</h2>
-            <ul>
-                <li>Systems directory with owners and access links</li>
-                <li>Environment setup checklists for new hires</li>
-                <li>Productivity tips, templates, and shortcuts</li>
-            </ul>
-        </div>
+        <section class="tool-section">
+            <div class="tool-intro">
+                <h2>Core tools (in order of daily reliance)</h2>
+                <p>The stack below represents the workflow sequence every teammate touches: AMS360 as the source of truth, Agency Zoom to interface with clients, Microsoft Teams for internal collaboration, and Outlook for external communication.</p>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>AMS360</h3>
+                        <span>Core agency management system within Vertafore</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Our primary Agency Management System (AMS) that houses every client, policy, accounting, and reporting record.</p>
+                            <p><strong>Why we use it:</strong> Acts as the system of record for service, accounting, AR, commission tracking, and management reporting.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Maintain client and policy records</li>
+                                <li>Track endorsements, renewals, cancellations, and claims</li>
+                                <li>Create tasks/suspenses for follow-up</li>
+                                <li>Run department and management reports</li>
+                                <li>Support accounting, AR, and commissions</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>Agency Zoom</h3>
+                        <span>Client portal & automation platform</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Our portal for client requests plus automation engine.</p>
+                            <p><strong>Why we use it:</strong> Streamlines service, automates tasks, and improves communication between clients and teams.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Accept service/endorsement requests via client portal</li>
+                                <li>Convert portal requests into AMS360 tasks and suspenses</li>
+                                <li>Route leads by department and run campaigns (SmartCycle, Win-Back)</li>
+                                <li>Leverage Zapier + Teams for notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>Microsoft Teams</h3>
+                        <span>Internal chat, meetings, and workflow alerts</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> The collaboration hub within Microsoft 365 for chat, voice, video, and notifications.</p>
+                            <p><strong>Why we use it:</strong> Keeps departments aligned, centralizes discussions, and surfaces automated alerts tied to workflows.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Host internal chats and daily standups</li>
+                                <li>Spin up ad-hoc or scheduled video meetings</li>
+                                <li>Receive workflow notifications from Agency Zoom and other systems</li>
+                                <li>Share files and collaborate directly from OneDrive</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>Outlook (Exchange Online)</h3>
+                        <span>External and departmental email</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Exchange Online accessed through Outlook for desktop and mobile.</p>
+                            <p><strong>Why we use it:</strong> Routes departmental inboxes, manages customer/vendor communication, and feeds compliance-ready records back into AMS360.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Manage shared departmental inboxes (Personal, Commercial, REO)</li>
+                                <li>Track customer and vendor conversations</li>
+                                <li>Trigger follow-up tasks or suspenses based on email activity</li>
+                                <li>Archive important correspondence to client files</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tool-section">
+            <div class="tool-intro">
+                <h2>Supporting systems</h2>
+                <p>Beyond the core workflow, these tools keep calls routed correctly and signatures flowing without bottlenecks.</p>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>Cytracom</h3>
+                        <span>Cloud phone system</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Our cloud-based phone and routing platform.</p>
+                            <p><strong>Why we use it:</strong> Ensures calls hit the right department or representative quickly.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Use auto-attendant scripts for new vs. existing customers</li>
+                                <li>Route calls by department (Personal, Commercial, REO)</li>
+                                <li>Provide direct paths for claims, billing, vendors, lenders</li>
+                                <li>Support round-robin or direct-to-rep call flows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>DocuSign</h3>
+                        <span>Electronic signature platform</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Secure, compliance-ready eSignature solution.</p>
+                            <p><strong>Why we use it:</strong> Collects legally binding signatures fast with audit trails and security.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Send insurance applications and policy docs</li>
+                                <li>Collect endorsements and change requests</li>
+                                <li>Capture client authorizations and disclosures</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>Adobe Acrobat</h3>
+                        <span>PDF editing & prep</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> PDF editing and document management software.</p>
+                            <p><strong>Why we use it:</strong> Prepares, edits, and organizes documents before/after signature.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Edit and combine PDFs</li>
+                                <li>Prep documents for DocuSign</li>
+                                <li>Review and store finalized files</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tool-card">
+                <button class="tool-head" type="button">
+                    <div>
+                        <h3>LastPass</h3>
+                        <span>Password management</span>
+                    </div>
+                    <div class="chevron">›</div>
+                </button>
+                <div class="tool-body">
+                    <div class="tool-inner">
+                        <div class="tool-tabs">
+                            <button class="tab-btn active" data-tab="knowledge">Knowledge</button>
+                            <button class="tab-btn" data-tab="practice">On the job</button>
+                        </div>
+                        <div class="tab-panel active" data-content="knowledge">
+                            <p><strong>What it is:</strong> Secure password manager for storing and sharing credentials.</p>
+                            <p><strong>Why we use it:</strong> Improves security, reduces password reuse, and allows role-based sharing without relying on chat or email.</p>
+                        </div>
+                        <div class="tab-panel" data-content="practice">
+                            <ul>
+                                <li>Store logins for approved agency tools and vendor portals</li>
+                                <li>Share access with team members by role/department</li>
+                                <li>Use the password generator for strong, unique credentials</li>
+                                <li>Maintain access continuity when roles change</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <script>
+        document.querySelectorAll('.tool-card').forEach(card => {
+            const head = card.querySelector('.tool-head');
+            head.addEventListener('click', () => {
+                card.classList.toggle('open');
+            });
+
+            const tabs = card.querySelectorAll('.tab-btn');
+            tabs.forEach(btn => {
+                btn.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    tabs.forEach(t => t.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const panels = card.querySelectorAll('.tab-panel');
+                    panels.forEach(panel => {
+                        panel.classList.remove('active');
+                    });
+                    card.querySelector(`.tab-panel[data-content="${btn.dataset.tab}"]`).classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

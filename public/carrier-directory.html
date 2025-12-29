@@ -294,6 +294,14 @@
             gap: 20px;
         }
 
+        .section-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
         .section-title {
             display: flex;
             align-items: center;
@@ -359,6 +367,79 @@
             color: var(--text-muted);
         }
 
+        .lob-filter {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .lob-filter label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .lob-filter select {
+            min-width: 220px;
+            padding: 12px 14px;
+            border-radius: 14px;
+            border: 2px solid var(--border-light);
+            background: var(--bg-white);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+        }
+
+        .lob-filter select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.08);
+        }
+
+        .preferred-toggle {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+        }
+
+        .preferred-toggle input {
+            width: 42px;
+            height: 22px;
+            appearance: none;
+            background: var(--border-light);
+            border-radius: 999px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        .preferred-toggle input::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease;
+        }
+
+        .preferred-toggle input:checked {
+            background: var(--primary-blue);
+        }
+
+        .preferred-toggle input:checked::after {
+            transform: translateX(20px);
+        }
+
+        .preferred-toggle span {
+            font-weight: 600;
+        }
+
         .company-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -373,6 +454,14 @@
             transition: all 0.3s ease;
             box-shadow: var(--shadow-soft);
             border: 2px solid transparent;
+        }
+
+        .company-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .company-card:hover {
@@ -394,6 +483,37 @@
             color: var(--text-dark);
             margin-bottom: 8px;
             line-height: 1.4;
+        }
+
+        .preferred-label {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(212, 168, 83, 0.15);
+            color: var(--accent-gold);
+            flex-shrink: 0;
+        }
+
+        .lob-chip-wrap {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .lob-chip {
+            padding: 4px 10px;
+            border-radius: 10px;
+            background: rgba(30, 58, 95, 0.08);
+            font-size: 0.75rem;
+            color: var(--primary-blue);
+        }
+
+        .lob-chip.active {
+            background: rgba(212, 168, 83, 0.2);
+            color: var(--accent-gold);
         }
 
         .company-card .contact-count {
@@ -438,12 +558,28 @@
             gap: 24px;
             color: var(--text-muted);
             font-size: 0.9rem;
+            flex-wrap: wrap;
         }
 
         .company-header .meta span {
             display: flex;
             align-items: center;
             gap: 6px;
+        }
+
+        .lob-meta {
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .preferred-tag {
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            background: rgba(212, 168, 83, 0.15);
+            color: var(--accent-gold);
         }
 
         .contact-grid {
@@ -665,11 +801,23 @@
                     <span class="section-badge" id="companyListBadge">Personal Lines</span>
                     <h2 id="companyListTitle">Select a Carrier</h2>
                 </div>
-                <div class="search-box">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input type="text" id="companySearch" placeholder="Search carriers..." oninput="filterCompanies()">
+                <div class="section-actions">
+                    <div class="search-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <input type="text" id="companySearch" placeholder="Search carriers..." oninput="filterCompanies()">
+                    </div>
+                    <div class="lob-filter" id="lobFilterWrapper">
+                        <label for="lobFilter">Line of business</label>
+                        <select id="lobFilter" onchange="handleLobFilterChange()">
+                            <option value="">All LOBs</option>
+                        </select>
+                    </div>
+                    <label class="preferred-toggle" id="preferredToggleWrapper">
+                        <input type="checkbox" id="preferredToggle" onchange="handlePreferredToggle(this)">
+                        <span>Show Preferred</span>
+                    </label>
                 </div>
             </div>
 
@@ -694,6 +842,8 @@
                         </svg>
                         <span id="contactCountText">0 Contacts</span>
                     </span>
+                    <span id="selectedLobText" class="lob-meta"></span>
+                    <span id="preferredBadge" class="preferred-tag" style="display: none;">⭐ Preferred</span>
                 </div>
             </div>
 
@@ -958,6 +1108,404 @@ WSG Specialty Underwriters,Jennifer Mackay,Property Underwriter,Commercial Lines
 XPT Partners LLC,Denise Rodriguez,CL Underwriter,Personal Line,denise.rodriguez@xptspecialty.com,(713)4001146 ext.,() ext.,
 Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,builders.risk@usassure.com,() ext.,() ext.,`;
 
+        const personalLobDefinitions = {
+            "Homeowners (HO)": [
+                { name: "Iron Family Holdings LLC", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "SWYFFT LLC", preferred: true },
+                { name: "Homeowners of America Holding Corporation", preferred: true },
+                { name: "SageSure Insurance Managers", preferred: true },
+                { name: "Goose Creek Capital Inc", preferred: true },
+                { name: "McCarthy Group LLC", preferred: false },
+                { name: "Beazley PLC", preferred: false },
+                { name: "Lloyd's Syndicate 1322", preferred: false },
+                { name: "Trisura Group Ltd", preferred: false },
+                { name: "QBE Insurance Group Limited", preferred: false },
+                { name: "Allstate Corporation", preferred: false },
+                { name: "Wellington Risk Insurance Agency", preferred: false },
+                { name: "Markel Group Inc", preferred: false },
+                { name: "American Risk Holding Inc", preferred: false },
+                { name: "Agricultural Workers Mutual Auto Insurance", preferred: false },
+                { name: "Universal Group Inc", preferred: false },
+                { name: "HJJ Holdings LLC", preferred: false },
+                { name: "MS and AD Insurance Group Holdings Inc", preferred: false },
+                { name: "Amwins Group Inc", preferred: false },
+                { name: "Zurich Insurance Group Ltd", preferred: false },
+                { name: "Palomar Holdings Inc", preferred: false },
+                { name: "Trean Insurance Group Inc", preferred: false },
+                { name: "Liberty Mutual Holding Company Inc", preferred: false },
+                { name: "Woodlands Insurance Company", preferred: false },
+                { name: "TOPA Equities Ltd", preferred: false },
+                { name: "Producers National Corporation", preferred: false },
+                { name: "Ryan Specialty Group", preferred: false },
+                { name: "Global Indemnity Group LLC", preferred: false },
+                { name: "Fairfax Financial Holdings Limited", preferred: false },
+                { name: "Brown and Brown Inc", preferred: false },
+                { name: "Fidentia Fortuna Holdings Ltd", preferred: false },
+                { name: "Berkshire Hathaway Inc", preferred: false },
+                { name: "Munich Reinsurance Company", preferred: false },
+                { name: "GeoVera Nova Holdings Inc", preferred: false }
+            ],
+            "Homeowners / Renters": [
+                { name: "Progressive Corporation", preferred: true },
+                { name: "Blue Sky Basin Capital Partners LLC", preferred: false }
+            ],
+            "Property – Fire / Property Perils": [
+                { name: "Iron Family Holdings LLC", preferred: true },
+                { name: "Wellington Risk Insurance Agency", preferred: true },
+                { name: "GeoVera Nova Holdings Inc", preferred: true },
+                { name: "Homeowners of America Holding Corporation", preferred: true },
+                { name: "Lloyd's", preferred: true },
+                { name: "American Financial Group Inc", preferred: true },
+                { name: "SageSure Insurance Managers", preferred: true },
+                { name: "SNIH Trust", preferred: false },
+                { name: "Liberty Mutual Holding Company Inc", preferred: false },
+                { name: "Goose Creek Capital Inc", preferred: false },
+                { name: "Travelers Companies Inc", preferred: false },
+                { name: "McCarthy Group LLC", preferred: false },
+                { name: "MS and AD Insurance Group Holdings Inc", preferred: false },
+                { name: "Convex Group Limited", preferred: false },
+                { name: "Palomar Holdings Inc", preferred: false },
+                { name: "Hippo Holdings Inc", preferred: false },
+                { name: "Brown and Brown Inc", preferred: false },
+                { name: "Munich Reinsurance Company", preferred: false },
+                { name: "AMSuisse", preferred: false },
+                { name: "Markel Group Inc", preferred: false },
+                { name: "Agricultural Workers Mutual Auto Insurance", preferred: false },
+                { name: "Obsidian Insurance Holdings Inc", preferred: false },
+                { name: "Universal Group Inc", preferred: false },
+                { name: "Southwest Frontier LP", preferred: false },
+                { name: "Progressive Corporation", preferred: false },
+                { name: "Allstate Corporation", preferred: false },
+                { name: "Honeycomb Programs Inc", preferred: false }
+            ],
+            "Property Flood": [
+                { name: "Hartford Insurance Group Inc", preferred: true },
+                { name: "Bankers Financial Corporation", preferred: true },
+                { name: "Universal Group Inc", preferred: true },
+                { name: "Neptune Flood", preferred: true },
+                { name: "Brown and Brown Inc", preferred: true },
+                { name: "Lloyd's", preferred: false },
+                { name: "Johnson and Johnson", preferred: false },
+                { name: "Howden Group Holdings", preferred: false },
+                { name: "Flood Risk Solutions LLC", preferred: false },
+                { name: "MS and AD Insurance Group Holdings Inc", preferred: false },
+                { name: "Hiscox Ltd", preferred: false },
+                { name: "National Flood Insurance Program / FEMA", preferred: false },
+                { name: "AXA S A", preferred: false },
+                { name: "Munich Reinsurance Company", preferred: false },
+                { name: "Allstate Corporation", preferred: false }
+            ],
+            "Property Builders Risk": [
+                { name: "Zurich Insurance Group Ltd", preferred: true },
+                { name: "Lloyd's", preferred: true },
+                { name: "Bankers Financial Corporation", preferred: false },
+                { name: "Truist Insurance Holdings Inc", preferred: false },
+                { name: "AXA S A", preferred: false }
+            ],
+            "Property Inland Marine": [
+                { name: "Lloyd's", preferred: true }
+            ],
+            "Property Windstorm": [
+                { name: "Texas Windstorm Insurance Association", preferred: true }
+            ],
+            "Liability": [
+                { name: "RLI Corp", preferred: true },
+                { name: "McCarthy Group LLC", preferred: false },
+                { name: "Hippo Holdings Inc", preferred: false }
+            ],
+            "Liability Umbrella / Excess": [
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "Liberty Mutual Holding Company Inc", preferred: true },
+                { name: "Berkshire Hathaway Inc", preferred: true }
+            ],
+            "Package": [
+                { name: "American Financial Group Inc", preferred: true },
+                { name: "Nationwide Mutual Insurance Company", preferred: true },
+                { name: "Trisura Group Ltd", preferred: true },
+                { name: "Global Indemnity Group LLC", preferred: true }
+            ],
+            "Auto": [
+                { name: "Progressive Corporation", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "Liberty Mutual Holding Company Inc", preferred: true }
+            ],
+            "Antique / Classic Auto": [
+                { name: "Tokio Marine Holdings Inc", preferred: true }
+            ],
+            "Watercraft": [
+                { name: "Progressive Corporation", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true }
+            ]
+        };
+
+        // Commercial Lines carrier definitions (preferred per RiskMatch reports).
+        const commercialLobDefinitions = {
+            "Property Risk": [
+                { name: "Beazley PLC", preferred: true },
+                { name: "Chubb Limited", preferred: true },
+                { name: "Berkshire Hathaway Inc", preferred: true },
+                { name: "Lloyd's", preferred: true },
+                { name: "Factory Mutual Insurance Company", preferred: true },
+                { name: "Munich Reinsurance Company", preferred: true },
+                { name: "MS and AD Insurance Group Holdings Inc", preferred: false },
+                { name: "American Financial Group Inc", preferred: false },
+                { name: "Fidentia Fortuna Holdings Ltd", preferred: false },
+                { name: "Victor Insurance Exchange", preferred: false },
+                { name: "Starr International Company Inc", preferred: false },
+                { name: "Amwins Group Inc", preferred: false },
+                { name: "Pine Brook Capital Partners II Cayman AV LP", preferred: false },
+                { name: "Kinsale Capital Group", preferred: false },
+                { name: "Fairfax Financial Holdings Limited", preferred: false },
+                { name: "Core Specialty Insurance Holdings Inc", preferred: false },
+                { name: "Coaction Global Inc", preferred: false },
+                { name: "Ryan Specialty Group", preferred: false },
+                { name: "Tiptree Inc", preferred: false },
+                { name: "Pathpoint Insurance Services", preferred: false }
+            ],
+            "Property Flood": [
+                { name: "Neptune Flood", preferred: true },
+                { name: "Lloyd's", preferred: true },
+                { name: "Brown and Brown Inc", preferred: true },
+                { name: "Flood Risk Solutions LLC", preferred: true },
+                { name: "National Flood Insurance Program / FEMA", preferred: true },
+                { name: "MS and AD Insurance Group Holdings Inc", preferred: false },
+                { name: "AXA S A", preferred: false },
+                { name: "Bankers Financial Corporation", preferred: false },
+                { name: "Allstate Corporation", preferred: false },
+                { name: "Hartford Insurance Group Inc", preferred: false },
+                { name: "Orbital Risk Capital Inc", preferred: false }
+            ],
+            "Property Windstorm": [
+                { name: "Texas Windstorm Insurance Association", preferred: true },
+                { name: "Berkshire Hathaway Inc", preferred: false }
+            ],
+            "Property Inland Marine": [
+                { name: "Hartford Insurance Group Inc", preferred: true }
+            ],
+            "Property Boiler & Machinery/Equipment Breakdown": [
+                { name: "Travelers Companies Inc", preferred: true }
+            ],
+            "Property Construction - Builders Risk + Installation": [
+                { name: "Zurich Insurance Group Ltd", preferred: true },
+                { name: "Nationwide Mutual Insurance Company", preferred: true },
+                { name: "Lloyd's", preferred: true },
+                { name: "American Financial Group Inc", preferred: true },
+                { name: "AXA S A", preferred: false },
+                { name: "Bankers Financial Corporation", preferred: false },
+                { name: "Truist Insurance Holdings Inc", preferred: false }
+            ],
+            "Workers' Compensation": [
+                { name: "Hartford Insurance Group Inc", preferred: true },
+                { name: "Texas Mutual Insurance Company", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "AmTrust Financial Services Inc", preferred: true },
+                { name: "CNA Financial Corporation", preferred: false },
+                { name: "Liberty Mutual Holding Company Inc", preferred: false },
+                { name: "Trean Insurance Group Inc", preferred: false },
+                { name: "Blue Cross Blue Shield of Michigan Mutual Insurance Company", preferred: false }
+            ],
+            "General Liability": [
+                { name: "Lloyd's", preferred: true },
+                { name: "W R Berkley Corporation", preferred: true },
+                { name: "Brookfield Wealth Solutions Ltd", preferred: true },
+                { name: "Liberty Mutual Holding Company Inc", preferred: true },
+                { name: "Chubb Limited", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "Berkshire Hathaway Inc", preferred: true },
+                { name: "Hartford Insurance Group Inc", preferred: true },
+                { name: "Kinsale Capital Group", preferred: true },
+                { name: "Nationwide Mutual Insurance Company", preferred: false },
+                { name: "Markel Group Inc", preferred: false },
+                { name: "Ryan Specialty Group", preferred: false },
+                { name: "CNA Financial Corporation", preferred: false },
+                { name: "AmTrust Financial Services Inc", preferred: false },
+                { name: "Zurich Insurance Group Ltd", preferred: false },
+                { name: "Burns & Wilcox", preferred: false },
+                { name: "Hiscox Ltd", preferred: false }
+            ],
+            "Umbrella / Excess Liability": [
+                { name: "Brookfield Wealth Solutions Ltd", preferred: true },
+                { name: "Munich Reinsurance Company", preferred: true },
+                { name: "Zimmer Financial Services Group LLC", preferred: true },
+                { name: "W R Berkley Corporation", preferred: true },
+                { name: "Liberty Mutual Holding Company Inc", preferred: true },
+                { name: "Nationwide Mutual Insurance Company", preferred: false },
+                { name: "Ryan Specialty Group", preferred: false },
+                { name: "James River Group Holdings Ltd", preferred: false },
+                { name: "Hartford Insurance Group Inc", preferred: false },
+                { name: "Travelers Companies Inc", preferred: false },
+                { name: "Markel Group Inc", preferred: false },
+                { name: "Berkshire Hathaway Inc", preferred: false },
+                { name: "Core Specialty Insurance Holdings Inc", preferred: false },
+                { name: "Pathpoint Insurance Services", preferred: false },
+                { name: "Chubb Limited", preferred: false },
+                { name: "CNA Financial Corporation", preferred: false },
+                { name: "Lloyd's", preferred: false },
+                { name: "AmTrust Financial Services Inc", preferred: false },
+                { name: "Burns & Wilcox", preferred: false },
+                { name: "Tokio Marine Holdings Inc", preferred: false }
+            ],
+            "Commercial Auto": [
+                { name: "Progressive Corporation", preferred: true },
+                { name: "Hartford Insurance Group Inc", preferred: true },
+                { name: "Berkshire Hathaway Inc", preferred: true },
+                { name: "Liberty Mutual Holding Company Inc", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "Home State Insurance Group", preferred: false }
+            ],
+            "Pollution Legal Liability": [
+                { name: "Lloyd's", preferred: true },
+                { name: "Chubb Limited", preferred: true }
+            ],
+            "Marine": [
+                { name: "Starr International Company Inc", preferred: true }
+            ],
+            "Surety Bonds": [
+                { name: "Propeller Inc", preferred: true },
+                { name: "Travelers Companies Inc", preferred: true },
+                { name: "Arch Capital Group Ltd", preferred: true }
+            ],
+            "Individual Bonds": [
+                { name: "Travelers Companies Inc", preferred: true }
+            ],
+            // Additional LOBs retained from previous reports
+            "Property Terrorism": [
+                { name: "Lloyd's", preferred: true },
+                { name: "AXA S A", preferred: false }
+            ],
+            "Property Miscellaneous": [
+                { name: "Berkshire Hathaway Inc", preferred: true }
+            ],
+            "Liability Garage & Dealers": [
+                { name: "Brookfield Wealth Solutions Ltd", preferred: true }
+            ]
+        };
+
+        const lobDefinitionsMap = {
+            PL: personalLobDefinitions,
+            CL: commercialLobDefinitions
+        };
+
+        const carrierMeta = {
+            PL: {},
+            CL: {}
+        };
+
+        const normalizationMaps = {
+            PL: { companyToNormalized: {}, normalizedToCompany: {} },
+            CL: { companyToNormalized: {}, normalizedToCompany: {} }
+        };
+
+        let currentLob = '';
+
+        function normalizeCompanyName(name) {
+            return name ? name.trim().toLowerCase().replace(/&/g, '').replace(/[^a-z0-9]/g, '') : '';
+        }
+
+        function getCompanyMapByType(type) {
+            return type === 'PL' ? plCompanies : clCompanies;
+        }
+
+        function buildNormalizationIndex(type) {
+            const maps = normalizationMaps[type];
+            maps.companyToNormalized = {};
+            maps.normalizedToCompany = {};
+            const companies = getCompanyMapByType(type);
+            Object.keys(companies).forEach(company => {
+                const normalized = normalizeCompanyName(company);
+                maps.companyToNormalized[company] = normalized;
+                if (!maps.normalizedToCompany[normalized]) {
+                    maps.normalizedToCompany[normalized] = company;
+                }
+            });
+        }
+
+        function ensureCarrierEntry(type, name) {
+            const maps = normalizationMaps[type];
+            const companies = getCompanyMapByType(type);
+            const normalized = normalizeCompanyName(name);
+            let canonical = maps.normalizedToCompany[normalized];
+            if (!canonical) {
+                canonical = name.trim();
+                if (!companies[canonical]) companies[canonical] = [];
+                maps.companyToNormalized[canonical] = normalized;
+                maps.normalizedToCompany[normalized] = canonical;
+            }
+            const metaStore = carrierMeta[type];
+            if (!metaStore[normalized]) {
+                metaStore[normalized] = {
+                    displayName: canonical,
+                    canonicalName: canonical,
+                    businessLine: type === 'PL' ? 'Personal Lines' : 'Commercial Lines',
+                    lobs: {}
+                };
+            } else if (!metaStore[normalized].canonicalName) {
+                metaStore[normalized].canonicalName = canonical;
+                metaStore[normalized].displayName = canonical;
+            }
+            return { normalized, meta: metaStore[normalized] };
+        }
+
+        function integrateLobDefinitions(type) {
+            const definitions = lobDefinitionsMap[type] || {};
+            Object.entries(definitions).forEach(([lob, carriers]) => {
+                carriers.forEach(entry => {
+                    const { normalized, meta } = ensureCarrierEntry(type, entry.name);
+                    meta.lobs[lob] = { preferred: Boolean(entry.preferred) };
+                    carrierMeta[type][normalized] = meta;
+                });
+            });
+        }
+
+        function getCarrierMeta(company, type) {
+            const maps = normalizationMaps[type];
+            if (!maps) return null;
+            const normalized = (maps.companyToNormalized && maps.companyToNormalized[company]) || normalizeCompanyName(company);
+            return (carrierMeta[type] && carrierMeta[type][normalized]) || null;
+        }
+
+        function getActiveLobDefinitions(type) {
+            return lobDefinitionsMap[type] || null;
+        }
+
+        function isPreferred(meta, lob) {
+            if (!meta || !meta.lobs) return false;
+            if (lob) {
+                return Boolean(meta.lobs[lob] && meta.lobs[lob].preferred);
+            }
+            return Object.values(meta.lobs).some(entry => entry.preferred);
+        }
+
+        function populateLobFilterOptions(type) {
+            const select = document.getElementById('lobFilter');
+            if (!select) return;
+            select.innerHTML = '<option value=\"\">All LOBs</option>';
+            const definitions = getActiveLobDefinitions(type);
+            if (definitions) {
+                Object.keys(definitions).sort().forEach(lob => {
+                    const option = document.createElement('option');
+                    option.value = lob;
+                    option.textContent = lob;
+                    select.appendChild(option);
+                });
+            }
+        }
+
+        function handleLobFilterChange() {
+            const select = document.getElementById('lobFilter');
+            if (!select) return;
+            currentLob = select.value;
+            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            renderCompanyGrid(companies);
+        }
+
+        function handlePreferredToggle(toggleEl) {
+            showPreferredOnly = toggleEl && toggleEl.checked;
+            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            renderCompanyGrid(companies);
+        }
+
         function parseCSV(csv) {
             const lines = csv.trim().split('\n');
             const data = [];
@@ -994,6 +1542,7 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
         let clCompanies = {};
         let currentType = '';
         let currentCompany = '';
+        let showPreferredOnly = false;
 
         function initData() {
             allData = parseCSV(csvData);
@@ -1007,6 +1556,11 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
                     clCompanies[contact.company].push(contact);
                 }
             });
+
+            buildNormalizationIndex('PL');
+            buildNormalizationIndex('CL');
+            integrateLobDefinitions('PL');
+            integrateLobDefinitions('CL');
 
             document.getElementById('plCompanyCount').textContent = Object.keys(plCompanies).length;
             document.getElementById('plContactCount').textContent = Object.values(plCompanies).reduce((sum, arr) => sum + arr.length, 0);
@@ -1023,6 +1577,16 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             showView('homeView');
             currentType = '';
             currentCompany = '';
+            currentLob = '';
+            const lobFilter = document.getElementById('lobFilter');
+            if (lobFilter) lobFilter.value = '';
+            const lobWrapper = document.getElementById('lobFilterWrapper');
+            if (lobWrapper) lobWrapper.style.display = 'none';
+            const preferredToggle = document.getElementById('preferredToggle');
+            const preferredWrapper = document.getElementById('preferredToggleWrapper');
+            if (preferredToggle) preferredToggle.checked = false;
+            if (preferredWrapper) preferredWrapper.style.display = 'none';
+            showPreferredOnly = false;
         }
 
         function goBackToCompanies() {
@@ -1039,20 +1603,53 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             badge.className = 'section-badge ' + type.toLowerCase();
             document.getElementById('companyListTitle').textContent = `Select a Carrier (${Object.keys(companies).length})`;
             document.getElementById('companySearch').value = '';
+            const lobWrapper = document.getElementById('lobFilterWrapper');
+            const lobFilter = document.getElementById('lobFilter');
+            const preferredWrapper = document.getElementById('preferredToggleWrapper');
+            const preferredToggle = document.getElementById('preferredToggle');
+            currentLob = '';
+            showPreferredOnly = false;
+            if (lobFilter) lobFilter.value = '';
+            if (preferredToggle) preferredToggle.checked = false;
+            const definitions = getActiveLobDefinitions(type);
+            const hasLobs = definitions && Object.keys(definitions).length > 0;
+            populateLobFilterOptions(type);
+            if (lobWrapper) lobWrapper.style.display = hasLobs ? 'flex' : 'none';
+            if (preferredWrapper) preferredWrapper.style.display = hasLobs ? 'flex' : 'none';
             renderCompanyGrid(companies);
             showView('companyListView');
         }
 
         function renderCompanyGrid(companies) {
             const grid = document.getElementById('companyGrid');
-            const sortedCompanies = Object.keys(companies).sort();
-            if (sortedCompanies.length === 0) {
+            const filteredCompanies = Object.keys(companies).filter(company => {
+                if (currentType) {
+                    const meta = getCarrierMeta(company, currentType);
+                    if (currentLob) {
+                        if (!meta || !meta.lobs[currentLob]) return false;
+                        if (showPreferredOnly && !isPreferred(meta, currentLob)) return false;
+                    } else if (showPreferredOnly) {
+                        if (!meta || !isPreferred(meta)) return false;
+                    }
+                }
+                return true;
+            }).sort();
+            if (filteredCompanies.length === 0) {
                 grid.innerHTML = '<div class="empty-state"><p>No carriers found</p></div>';
                 return;
             }
-            grid.innerHTML = sortedCompanies.map(company => `
+            grid.innerHTML = filteredCompanies.map(company => {
+                const meta = currentType ? getCarrierMeta(company, currentType) : null;
+                const lobChips = meta ? Object.keys(meta.lobs).sort().map(lob => `<span class="lob-chip ${currentLob === lob ? 'active' : ''}">${lob}</span>`).join('') : '';
+                const showPreferredBadge = meta && (currentLob ? isPreferred(meta, currentLob) : isPreferred(meta));
+                const preferredBadge = showPreferredBadge ? '<span class="preferred-label">⭐ Preferred</span>' : '';
+                return `
                 <div class="company-card ${currentType.toLowerCase()}" onclick="showContacts('${company.replace(/'/g, "\\'")}')">
-                    <h3>${company}</h3>
+                    <div class="company-card-top">
+                        <h3>${company}</h3>
+                        ${preferredBadge}
+                    </div>
+                    ${lobChips ? `<div class="lob-chip-wrap">${lobChips}</div>` : ''}
                     <div class="contact-count">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -1060,7 +1657,8 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
                         ${companies[company].length} contact${companies[company].length > 1 ? 's' : ''}
                     </div>
                 </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function filterCompanies() {
@@ -1079,6 +1677,37 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             const contacts = companies[company] || [];
             document.getElementById('selectedCompanyName').textContent = company;
             document.getElementById('contactCountText').textContent = `${contacts.length} Contact${contacts.length > 1 ? 's' : ''}`;
+            const lobText = document.getElementById('selectedLobText');
+            const preferredBadge = document.getElementById('preferredBadge');
+            if (currentType) {
+                const meta = getCarrierMeta(company, currentType);
+                if (meta) {
+                    const lobKeys = Object.keys(meta.lobs);
+                    const preferredLobs = lobKeys.filter(lob => meta.lobs[lob].preferred);
+                    const activeLob = currentLob && meta.lobs[currentLob] ? currentLob : '';
+                    if (lobText) {
+                        if (activeLob) {
+                            lobText.textContent = activeLob;
+                        } else if (preferredLobs.length) {
+                            lobText.textContent = `Preferred for: ${preferredLobs.join(', ')}`;
+                        } else if (lobKeys.length) {
+                            lobText.textContent = `LOBs: ${lobKeys.join(', ')}`;
+                        } else {
+                            lobText.textContent = '';
+                        }
+                    }
+                    if (preferredBadge) {
+                        const showBadge = activeLob ? Boolean(meta.lobs[activeLob].preferred) : preferredLobs.length > 0;
+                        preferredBadge.style.display = showBadge ? 'inline-flex' : 'none';
+                    }
+                } else {
+                    if (lobText) lobText.textContent = '';
+                    if (preferredBadge) preferredBadge.style.display = 'none';
+                }
+            } else {
+                if (lobText) lobText.textContent = '';
+                if (preferredBadge) preferredBadge.style.display = 'none';
+            }
             renderContactGrid(contacts);
             showView('contactView');
         }
