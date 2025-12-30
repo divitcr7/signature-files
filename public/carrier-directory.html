@@ -109,19 +109,10 @@
 
         .home-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 32px;
-            max-width: 900px;
+            max-width: 1100px;
             margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .home-grid {
-                grid-template-columns: 1fr;
-            }
-            .header h1 {
-                font-size: 2rem;
-            }
         }
 
         .main-card {
@@ -155,6 +146,10 @@
             background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8a 100%);
         }
 
+        .main-card.reo::before {
+            background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+        }
+
         .main-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-hover);
@@ -170,6 +165,10 @@
 
         .main-card.cl:hover {
             border-color: var(--primary-blue);
+        }
+
+        .main-card.reo:hover {
+            border-color: #14b8a6;
         }
 
         .card-icon {
@@ -195,6 +194,10 @@
             background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(45, 90, 138, 0.1) 100%);
         }
 
+        .main-card.reo .card-icon {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.18) 0%, rgba(14, 116, 144, 0.18) 100%);
+        }
+
         .card-icon svg {
             width: 40px;
             height: 40px;
@@ -206,6 +209,10 @@
 
         .main-card.cl .card-icon svg {
             color: var(--primary-blue);
+        }
+
+        .main-card.reo .card-icon svg {
+            color: #0f766e;
         }
 
         .main-card h2 {
@@ -221,6 +228,10 @@
 
         .main-card.cl h2 {
             color: var(--primary-blue);
+        }
+
+        .main-card.reo h2 {
+            color: #0f766e;
         }
 
         .main-card p {
@@ -249,6 +260,10 @@
 
         .main-card.cl .stat-number {
             color: var(--primary-blue);
+        }
+
+        .main-card.reo .stat-number {
+            color: #0f766e;
         }
 
         .stat-label {
@@ -325,6 +340,11 @@
         .section-badge.cl {
             background: linear-gradient(135deg, rgba(30, 58, 95, 0.1) 0%, rgba(45, 90, 138, 0.1) 100%);
             color: var(--primary-blue);
+        }
+
+        .section-badge.reo {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.12) 0%, rgba(14, 116, 144, 0.12) 100%);
+            color: #0f766e;
         }
 
         .section-title h2 {
@@ -477,6 +497,10 @@
             border-color: var(--primary-blue);
         }
 
+        .company-card.reo:hover {
+            border-color: #14b8a6;
+        }
+
         .company-card h3 {
             font-size: 1rem;
             font-weight: 600;
@@ -535,6 +559,10 @@
 
         .company-card.cl .contact-count svg {
             color: var(--primary-blue);
+        }
+
+        .company-card.reo .contact-count svg {
+            color: #0f766e;
         }
 
         .company-header {
@@ -780,6 +808,27 @@
                         </div>
                         <div class="stat">
                             <span class="stat-number" id="clContactCount">-</span>
+                            <span class="stat-label">Contacts</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="main-card reo" onclick="showCompanyList('REO')">
+                    <div class="card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75a3 3 0 014.5 0m-4.5 4.5a3 3 0 014.5 0M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <h2>REO</h2>
+                    <p>Lender-placed & REO specialists</p>
+                    <div class="card-stats">
+                        <div class="stat">
+                            <span class="stat-number" id="reoCompanyCount">-</span>
+                            <span class="stat-label">Carriers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number" id="reoContactCount">-</span>
                             <span class="stat-label">Contacts</span>
                         </div>
                     </div>
@@ -1108,6 +1157,30 @@ WSG Specialty Underwriters,Jennifer Mackay,Property Underwriter,Commercial Lines
 XPT Partners LLC,Denise Rodriguez,CL Underwriter,Personal Line,denise.rodriguez@xptspecialty.com,(713)4001146 ext.,() ext.,
 Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,builders.risk@usassure.com,() ext.,() ext.,`;
 
+        const reoSeedData = `Company,Name,Position,Department,Email
+Breckenridge,Elizabeth Nelson,Renewals,REO,enelson@breckis.com
+Breckenridge,Kristina Freeze,New Business,REO,kfreeze@breckis.com
+Breckenridge,Dawn Turnbough,Monthly Accounts,REO,dturnbough@breckis.com
+Breckenridge,Endorsements,Endorsements,REO,endorsementsMRH@breckis.com
+Breckenridge,Ann Jones,Endorsements / Inspections,REO,AHJones@BRECKIS.COM
+Specialty Pro Underwriter,Christian Perez,REO Contact,REO,christian@spunderwriters.com
+Specialty Pro Underwriter,Brian Bello,REO Contact,REO,brian@spunderwriters.com
+Specialty Pro Underwriter,SPU Submissions,REO Contact,REO,REI@spunderwriters.com
+Specialty Pro Underwriter,Olivia Elortegui,REO Contact,REO,olivia@spunderwriters.com
+Specialty Pro Underwriter,SPU Quotes,Individual Property Quotes,REO,quotes@spunderwriters.com
+Element 22,Nick Peterson,REO Contact,REO,npeterson@element22ins.com
+Bass Underwriters,Bert Perez,REO Contact,REO,hperez@bassuw.com
+Bass Underwriters,Daniela Pereyra,REO Contact,REO,dpereyra@bassuw.com
+Brown & Riding,Julie Alejo,REO Contact,REO,JAlejo@brcins.com
+Brown & Riding,Stephanie Foglesong,REO Contact,REO,SFoglesong@brcins.com
+SES,Account Management,REO Contact,REO,accountmgmt@ses-ins.com
+SES,REI Support,REO Contact,REO,rei_support@ses-ins.com
+SES,Brian Magallanes,REO Contact,REO,bmagallanes@ses-ins.com
+Loan Protector,Jacob Sapna,Main Point of Contact,REO,jsapna@proctorlp.com
+Loan Protector,Michelle Unger,Loan Protector Billing,REO,mUnger@proctorlp.com
+Loan Protector,Tessa MacGown,REO Contact,REO,tmacgown@proctorlp.com
+Pathpoint,Keegan Young,REO Contact,REO,kyoung@pathpoint.com`;
+
         const personalLobDefinitions = {
             "Homeowners (HO)": [
                 { name: "Iron Family Holdings LLC", preferred: true },
@@ -1384,17 +1457,20 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
 
         const lobDefinitionsMap = {
             PL: personalLobDefinitions,
-            CL: commercialLobDefinitions
+            CL: commercialLobDefinitions,
+            REO: null
         };
 
         const carrierMeta = {
             PL: {},
-            CL: {}
+            CL: {},
+            REO: {}
         };
 
         const normalizationMaps = {
             PL: { companyToNormalized: {}, normalizedToCompany: {} },
-            CL: { companyToNormalized: {}, normalizedToCompany: {} }
+            CL: { companyToNormalized: {}, normalizedToCompany: {} },
+            REO: { companyToNormalized: {}, normalizedToCompany: {} }
         };
 
         let currentLob = '';
@@ -1404,7 +1480,10 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
         }
 
         function getCompanyMapByType(type) {
-            return type === 'PL' ? plCompanies : clCompanies;
+            if (type === 'PL') return plCompanies;
+            if (type === 'CL') return clCompanies;
+            if (type === 'REO') return reoCompanies;
+            return {};
         }
 
         function buildNormalizationIndex(type) {
@@ -1437,7 +1516,7 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
                 metaStore[normalized] = {
                     displayName: canonical,
                     canonicalName: canonical,
-                    businessLine: type === 'PL' ? 'Personal Lines' : 'Commercial Lines',
+                    businessLine: type === 'PL' ? 'Personal Lines' : type === 'CL' ? 'Commercial Lines' : 'REO Programs',
                     lobs: {}
                 };
             } else if (!metaStore[normalized].canonicalName) {
@@ -1496,13 +1575,13 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             const select = document.getElementById('lobFilter');
             if (!select) return;
             currentLob = select.value;
-            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const companies = getCompanyMapByType(currentType);
             renderCompanyGrid(companies);
         }
 
         function handlePreferredToggle(toggleEl) {
             showPreferredOnly = toggleEl && toggleEl.checked;
-            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const companies = getCompanyMapByType(currentType);
             renderCompanyGrid(companies);
         }
 
@@ -1527,6 +1606,28 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             return data;
         }
 
+        function parseReoSeed(csv) {
+            if (!csv) return [];
+            const lines = csv.trim().split('\n');
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',');
+                if (values.length >= 5) {
+                    data.push({
+                        company: values[0].trim(),
+                        name: values[1].trim(),
+                        position: values[2].trim() || 'REO Contact',
+                        department: 'REO Programs',
+                        email: values[4].trim(),
+                        phone: '',
+                        cell: '',
+                        fax: ''
+                    });
+                }
+            }
+            return data;
+        }
+
         function isPersonalLines(position) {
             const plKeywords = ['PL', 'Personal Lines', 'Personal Line'];
             return plKeywords.some(keyword => position.toUpperCase().includes(keyword.toUpperCase()));
@@ -1540,6 +1641,7 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
         let allData = [];
         let plCompanies = {};
         let clCompanies = {};
+        let reoCompanies = {};
         let currentType = '';
         let currentCompany = '';
         let showPreferredOnly = false;
@@ -1557,8 +1659,15 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
                 }
             });
 
+            const reoSeed = parseReoSeed(reoSeedData);
+            reoSeed.forEach(contact => {
+                if (!reoCompanies[contact.company]) reoCompanies[contact.company] = [];
+                reoCompanies[contact.company].push(contact);
+            });
+
             buildNormalizationIndex('PL');
             buildNormalizationIndex('CL');
+            buildNormalizationIndex('REO');
             integrateLobDefinitions('PL');
             integrateLobDefinitions('CL');
 
@@ -1566,6 +1675,8 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
             document.getElementById('plContactCount').textContent = Object.values(plCompanies).reduce((sum, arr) => sum + arr.length, 0);
             document.getElementById('clCompanyCount').textContent = Object.keys(clCompanies).length;
             document.getElementById('clContactCount').textContent = Object.values(clCompanies).reduce((sum, arr) => sum + arr.length, 0);
+            document.getElementById('reoCompanyCount').textContent = Object.keys(reoCompanies).length;
+            document.getElementById('reoContactCount').textContent = Object.values(reoCompanies).reduce((sum, arr) => sum + arr.length, 0);
         }
 
         function showView(viewId) {
@@ -1597,9 +1708,10 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
 
         function showCompanyList(type) {
             currentType = type;
-            const companies = type === 'PL' ? plCompanies : clCompanies;
+            const companies = getCompanyMapByType(type);
             const badge = document.getElementById('companyListBadge');
-            badge.textContent = type === 'PL' ? 'Personal Lines' : 'Commercial Lines';
+            const badgeText = type === 'PL' ? 'Personal Lines' : type === 'CL' ? 'Commercial Lines' : 'REO Programs';
+            badge.textContent = badgeText;
             badge.className = 'section-badge ' + type.toLowerCase();
             document.getElementById('companyListTitle').textContent = `Select a Carrier (${Object.keys(companies).length})`;
             document.getElementById('companySearch').value = '';
@@ -1643,8 +1755,9 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
                 const lobChips = meta ? Object.keys(meta.lobs).sort().map(lob => `<span class="lob-chip ${currentLob === lob ? 'active' : ''}">${lob}</span>`).join('') : '';
                 const showPreferredBadge = meta && (currentLob ? isPreferred(meta, currentLob) : isPreferred(meta));
                 const preferredBadge = showPreferredBadge ? '<span class="preferred-label">⭐ Preferred</span>' : '';
+                const cardTypeClass = currentType ? currentType.toLowerCase() : '';
                 return `
-                <div class="company-card ${currentType.toLowerCase()}" onclick="showContacts('${company.replace(/'/g, "\\'")}')">
+                <div class="company-card ${cardTypeClass}" onclick="showContacts('${company.replace(/'/g, "\\'")}')">
                     <div class="company-card-top">
                         <h3>${company}</h3>
                         ${preferredBadge}
@@ -1663,7 +1776,7 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
 
         function filterCompanies() {
             const searchTerm = document.getElementById('companySearch').value.toLowerCase();
-            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const companies = getCompanyMapByType(currentType);
             const filtered = {};
             Object.keys(companies).forEach(company => {
                 if (company.toLowerCase().includes(searchTerm)) filtered[company] = companies[company];
@@ -1673,7 +1786,7 @@ Zurich North America,Zurich Underwriting,BUILDERS RISK UW,Commercial Lines,build
 
         function showContacts(company) {
             currentCompany = company;
-            const companies = currentType === 'PL' ? plCompanies : clCompanies;
+            const companies = getCompanyMapByType(currentType);
             const contacts = companies[company] || [];
             document.getElementById('selectedCompanyName').textContent = company;
             document.getElementById('contactCountText').textContent = `${contacts.length} Contact${contacts.length > 1 ? 's' : ''}`;
