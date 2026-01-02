@@ -1,216 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Company Handbook | Benchmark Onboarding</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #1e3a5f;
-            --accent: #2d5a8a;
-            --muted: #6b7280;
-            --white: #ffffff;
-            --border: #e5e7eb;
-            --bg: linear-gradient(135deg, #edf4fb 0%, #fefefe 100%);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Company Handbook | Benchmark Onboarding</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a5f;
+      --accent: #2d5a8a;
+      --muted: #6b7280;
+      --white: #ffffff;
+      --border: #e5e7eb;
+      --bg: linear-gradient(135deg, #edf4fb 0%, #fefefe 100%);
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            min-height: 100vh;
-            color: var(--primary);
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      min-height: 100vh;
+      color: var(--primary);
+    }
 
-        .home-link {
-            position: fixed;
-            top: 24px;
-            left: 24px;
-            padding: 10px 18px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: rgba(255, 255, 255, 0.95);
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-            box-shadow: 0 10px 25px rgba(30, 58, 95, 0.12);
-        }
+    .home-link {
+      position: fixed;
+      top: 24px;
+      left: 24px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(30, 58, 95, 0.12);
+      transition: transform 160ms ease;
+    }
 
-        .home-link:hover { transform: translateY(-2px); }
+    .home-link:hover { transform: translateY(-2px); }
 
-        main {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 120px 20px 80px;
-        }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 120px 20px 80px;
+    }
 
-        .badge {
-            display: inline-flex;
-            padding: 10px 18px;
-            border-radius: 999px;
-            background: rgba(45, 90, 138, 0.12);
-            color: var(--accent);
-            letter-spacing: 0.1em;
-            font-size: 0.85rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+    .badge {
+      display: inline-flex;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(45, 90, 138, 0.12);
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
 
-        h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.8rem;
-            margin-bottom: 16px;
-        }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+    }
 
-        .lede {
-            font-size: 1.05rem;
-            color: var(--muted);
-            line-height: 1.6;
-            margin-bottom: 28px;
-        }
+    .subtitle {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+    }
 
-        .hero-card {
-            background: var(--white);
-            border-radius: 28px;
-            padding: 32px;
-            border: 1px solid rgba(30, 58, 95, 0.08);
-            box-shadow: 0 20px 40px rgba(30, 58, 95, 0.08);
-            margin-bottom: 40px;
-        }
+    .lede {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
 
-        .hero-card img {
-            width: 250px;
-            height: auto;
-            margin-bottom: 24px;
-        }
+    .hero-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 32px;
+      border: 1px solid rgba(30, 58, 95, 0.08);
+      box-shadow: 0 20px 40px rgba(30, 58, 95, 0.08);
+      margin-bottom: 40px;
+    }
 
-        h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.9rem;
-            margin: 32px 0 12px;
-        }
+    .hero-card img {
+      width: 250px;
+      height: auto;
+      margin-bottom: 24px;
+    }
 
-        h3 {
-            font-size: 1.2rem;
-            margin: 18px 0 8px;
-        }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.9rem;
+      margin: 32px 0 12px;
+    }
 
-        p { line-height: 1.6; color: var(--primary); margin-bottom: 14px; }
+    h3 {
+      font-size: 1.2rem;
+      margin: 18px 0 8px;
+    }
 
-        ul { margin: 12px 0 20px 20px; color: var(--primary); line-height: 1.6; }
+    p { line-height: 1.6; color: var(--primary); margin-bottom: 14px; }
 
-        .card {
-            background: var(--white);
-            border-radius: 22px;
-            padding: 28px;
-            border: 1px solid rgba(30, 58, 95, 0.08);
-            box-shadow: 0 12px 30px rgba(30, 58, 95, 0.08);
-            margin-bottom: 32px;
-        }
+    ul { margin: 12px 0 20px 20px; color: var(--primary); line-height: 1.6; }
 
-        .muted { color: var(--muted); }
-    </style>
+    .card {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 28px;
+      border: 1px solid rgba(30, 58, 95, 0.08);
+      box-shadow: 0 12px 30px rgba(30, 58, 95, 0.08);
+      margin-bottom: 32px;
+    }
+
+    .muted { color: var(--muted); }
+
+    .divider {
+      height: 1px;
+      background: rgba(30, 58, 95, 0.10);
+      margin: 18px 0;
+      border-radius: 999px;
+    }
+
+    .signature-line {
+      display: block;
+      border-bottom: 1px solid rgba(30, 58, 95, 0.25);
+      height: 22px;
+      margin: 10px 0 18px;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .sig-label {
+      font-weight: 700;
+      margin-top: 14px;
+    }
+  </style>
 </head>
 <body>
-    <a class="home-link" href="index.html">← Back to Hub</a>
-    <main>
-        <span class="badge">Employee handbook</span>
-        <h1>Benchmark Insurance Group Handbook</h1>
-        <p class="lede">Your reference for policies, expectations, and the culture that defines Benchmark Insurance Group of Texas. Review each section carefully—compliance with both the handbook and applicable regulations is part of every teammate’s job.</p>
+  <a class="home-link" href="index.html">← Back to Hub</a>
 
-        <div class="hero-card">
-            <img src="logo.png" alt="Benchmark logo">
-            <p>This Employee Handbook supersedes prior versions and may be updated at Benchmark’s discretion. Employees are responsible for staying current on revisions.</p>
-        </div>
+  <main>
+    <span class="badge">Employee handbook</span>
+    <h1>Benchmark Insurance Group Handbook</h1>
+    <div class="subtitle">January 2026</div>
+    <p class="lede">
+      Your reference for policies, expectations, and the culture that defines Benchmark Insurance Group.
+      Review each section carefully—compliance with both the handbook and applicable regulations is part of every teammate’s job.
+    </p>
 
-        <section class="card">
-            <h2>About Benchmark</h2>
-            <p>Benchmark Insurance Group is a privately held brokerage specializing in real estate, construction, and hospitality risks since 2007. We deliver tailored solutions, proactive risk management, and hands-on service nationwide.</p>
-            <h3>Vision, Mission & Values</h3>
-            <ul>
-                <li><strong>Vision:</strong> Empower clients with insurance solutions that address real-world risks.</li>
-                <li><strong>Mission:</strong> Help clients navigate uncertainty through accessible, accurate, and timely expertise.</li>
-                <li><strong>Core values:</strong> Integrity, accountability, ownership mindset, teamwork, client-first service.</li>
-            </ul>
-        </section>
+    <div class="hero-card">
+      <img src="logo.png" alt="Benchmark logo">
+      <p>
+        This Employee Handbook supersedes prior versions and may be updated at Benchmark’s discretion.
+        Employees are responsible for staying current on revisions.
+      </p>
+    </div>
 
-        <section class="card">
-            <h2>Employment Relationship</h2>
-            <p>All employment with Benchmark is at-will. Either party may terminate employment at any time, with or without cause or notice, as permitted by law. Only a written agreement signed by the President can alter this status.</p>
-            <h3>Introductory Period</h3>
-            <p>The first 90 days of employment are an introductory period to confirm alignment with role expectations, culture, and performance standards.</p>
-            <h3>Separation</h3>
-            <p>Please provide at least two weeks’ notice when resigning. Return company property, complete exit interviews if requested, and note that final pay and benefits follow policy and law.</p>
-        </section>
+    <section class="card">
+      <h2>About Benchmark Insurance Group</h2>
+      <p>
+        Benchmark Insurance Group is a privately held insurance brokerage specializing in real estate, construction,
+        and hospitality risks with its inception in 2007. Benchmark delivers tailored insurance solutions, proactive
+        risk management strategies, and hands-on client service nationwide. Benchmark combines industry expertise,
+        proprietary technology, and disciplined processes to provide transparency, competitive coverage placement,
+        and long-term client partnerships.
+      </p>
 
-        <section class="card">
-            <h2>Ownership Culture & Conduct</h2>
-            <p>Think like an owner: manage time effectively, exercise judgment, and proactively support clients. Maintain a substance-free, respectful workplace, communicate promptly, and document work accurately.</p>
-            <p>Business casual attire is expected unless otherwise noted; dress professionally for client meetings and virtual engagements.</p>
-        </section>
+      <h3>Vision, Mission &amp; Values</h3>
+      <ul>
+        <li><strong>Vision:</strong> To empower clients with insurance solutions that address real-world risks.</li>
+        <li><strong>Mission:</strong> To help clients navigate uncertainty with confidence through accessible, accurate, and timely expertise.</li>
+        <li><strong>Core Values:</strong> Integrity, accountability, ownership mindset, teamwork, and client-first service.</li>
+      </ul>
+    </section>
 
-        <section class="card">
-            <h2>Equal Opportunity, Anti-Harassment & ADA</h2>
-            <p>Benchmark prohibits discrimination or harassment based on protected characteristics and supports a retaliation-free reporting environment. We comply with the Americans with Disabilities Act and provide reasonable accommodations where possible.</p>
-        </section>
+    <section class="card">
+      <h2>Employment Relationship &amp; At-Will Status</h2>
+      <p>
+        All employment with Benchmark is at-will. This means that either the employee or Benchmark may terminate the
+        employment relationship at any time, with or without cause or notice, subject to applicable law. Nothing in
+        this handbook, or any other company communication, creates a contract of employment or guarantees employment
+        for any specific duration.
+      </p>
+      <p>
+        Benchmark reserves the right to modify job duties, compensation, schedules, work locations, and policies at its
+        discretion. Only a written agreement signed by the President of Benchmark can alter the at-will nature of employment.
+      </p>
 
-        <section class="card">
-            <h2>Work Location, Hours & Classification</h2>
-            <p>Roles may be in-office, hybrid, or remote; maintain a professional workspace. Standard hours are Monday–Friday, 8:00 a.m.–6:00 p.m. CT. Non-exempt overtime requires prior approval.</p>
-            <p>Employees are classified (e.g., management, Producers, Account Managers, support) based on responsibilities. Insurance-facing roles require active Texas Department of Insurance licenses.</p>
-        </section>
+      <h3>Introductory Period</h3>
+      <p>
+        All new employees are subject to a 90-day introductory period beginning on the first day of employment. This period
+        allows both the employee and the company to evaluate performance, productivity, professionalism, and cultural alignment.
+        Completion of the introductory period does not guarantee continued employment or alter at-will status.
+      </p>
 
-        <section class="card">
-            <h2>Licensing & Background Checks</h2>
-            <p>Licensed employees must obtain and maintain valid TDI licenses, complete CE, and report any status changes immediately.</p>
-            <p>Background checks for licensed roles may include criminal history, credit, license verification, employment, education, and regulatory review. Offers are contingent on successful completion.</p>
-        </section>
+      <h3>Separation of Employment</h3>
+      <p>
+        Employees are requested to provide at least two weeks’ notice for voluntary resignation. Benchmark may conduct exit
+        interviews to support continuous improvement. Company property must be returned upon separation. Final pay and benefits
+        are processed in accordance with policy and law.
+      </p>
+    </section>
 
-        <section class="card">
-            <h2>Payroll, Compensation & Benefits</h2>
-            <p>Employees are paid via direct deposit on the 1st and 15th, adjusted for banking holidays. Compensation plans may change and are documented in writing.</p>
-            <p>Benchmark offers medical, dental, vision, life, disability, paid holidays, and PTO. Plan details are shared during onboarding and open enrollment.</p>
-            <h3>Company Holidays</h3>
-            <p class="muted">New Year’s Day, MLK Day, Good Friday, Memorial Day, Juneteenth, Independence Day, Labor Day, Thanksgiving Day, Black Friday, Christmas Eve, Christmas Day, New Year’s Eve.</p>
-        </section>
+    <section class="card">
+      <h2>Ownership Culture &amp; Service Expectations</h2>
+      <p>
+        Benchmark fosters an ownership culture in which employees are expected to think like business owners. This includes
+        taking accountability for results, managing time effectively, exercising sound judgment, and proactively addressing
+        client needs. Every employee plays a role in delivering Benchmark’s value proposition.
+      </p>
+      <p>
+        Employees are expected to communicate clearly, respond promptly, maintain accurate documentation,
+        and uphold the highest professional and ethical standards.
+      </p>
 
-        <section class="card">
-            <h2>PTO Policy</h2>
-            <p>PTO supports rest, personal needs, family responsibilities, and jury duty. Employees become eligible after 90 days and accrue PTO based on tenure.</p>
-            <ul>
-                <li>0–2 years: 14 days annually (1.16 days/month)</li>
-                <li>2–3 years: 15.5 days annually</li>
-                <li>3–4 years: 17 days annually</li>
-                <li>4–5 years: 18.5 days annually</li>
-                <li>5+ years: 20 days annually</li>
-            </ul>
-            <p>Up to 5 days (40 hours) may roll over but must be used by June 30. PTO balance may not exceed 1.5× the annual accrual. PTO requests should be submitted two weeks in advance when possible.</p>
-            <p>Payout on separation is limited to unused PTO earned in the current year (max 10 days) for voluntary separations; involuntary separations for cause are not paid unless required by law.</p>
-        </section>
+      <h3>Workplace Conduct &amp; Professional Standards</h3>
+      <p>
+        Benchmark maintains a professional, substance-free workplace. Employees must conduct themselves ethically,
+        comply with company policies, and treat colleagues, clients, and partners with respect.
+        Business casual attire is expected unless otherwise directed. Professional appearance is required for client
+        meetings and virtual engagements.
+      </p>
+    </section>
 
-        <section class="card">
-            <h2>Carrier Standards & Contracts</h2>
-            <p>Business should be placed with insurers rated at least A- by A.M. Best. Exceptions require written approval from the Agency President with documented rationale and insured acknowledgement.</p>
-            <p>Only the Agency President or VP of Operations may sign insurer, brokerage, or vendor agreements. Capital expenditures must be budgeted and approved by the agency president.</p>
-        </section>
+    <section class="card">
+      <h2>Equal Employment Opportunity &amp; Anti-Harassment</h2>
+      <p>
+        Benchmark is an Equal Opportunity Employer and prohibits discrimination or harassment based on race, color, religion,
+        sex, gender identity, sexual orientation, national origin, age, disability, veteran status, genetic information, or
+        any other protected characteristic.
+      </p>
+      <p>
+        Harassment of any kind—including verbal, physical, visual, or electronic—is strictly prohibited. Employees are encouraged
+        to report concerns promptly without fear of retaliation.
+      </p>
 
-        <section class="card">
-            <h2>Errors & Omissions / Complaints</h2>
-            <p>Complaints and potential E&O incidents are logged and reviewed with leadership as a standing agenda item. Relevant information is shared on a need-to-know basis.</p>
-        </section>
+      <h3>Americans with Disabilities Act (ADA)</h3>
+      <p>
+        Benchmark complies with the Americans with Disabilities Act and provides reasonable accommodations to qualified individuals
+        unless doing so would cause undue hardship.
+      </p>
+    </section>
 
-        <section class="card">
-            <h2>Education & Development</h2>
-            <p>Benchmark supports ongoing education. Development plans are part of annual reviews and require manager and president approval. Continuing education for licensing is mandatory.</p>
-        </section>
+    <section class="card">
+      <h2>Work Location</h2>
+      <p>
+        Positions may be designated as in-office, hybrid, or remote. Employees must maintain a secure, professional,
+        and distraction-free work environment regardless of location.
+      </p>
 
-        <section class="card">
-            <h2>Technology, Security & Records</h2>
-            <p>Company systems are for business use only. Follow cybersecurity, password, and confidentiality protocols. Unauthorized access or disclosure is prohibited.</p>
-            <p>Maintain accurate records per regulatory retention requirements.</p>
-        </section>
-    </main>
+      <h3>Work Hours &amp; Scheduling</h3>
+      <p>
+        Benchmark’s standard business hours are Monday through Friday, 8:00 a.m. to 6:00 p.m. Central Time. Specific schedules
+        may vary based on role and client needs. Employees are expected to be responsive and available during core business hours.
+        Non-exempt employees must obtain prior approval for overtime. Unauthorized overtime is prohibited.
+      </p>
+
+      <h3>Employment Classification</h3>
+      <p>
+        Benchmark employees may be classified as management, Producers, Account Managers, or administrative support staff.
+        Positions involving the solicitation, sale, or servicing of insurance require appropriate licenses issued by the
+        Texas Department of Insurance.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Licensing</h2>
+      <p>
+        All employees whose roles involve the solicitation, sale, or servicing of insurance products must hold and maintain
+        valid and active insurance licenses as required by the Texas Department of Insurance (TDI). These licenses must be
+        appropriate to the lines of authority and responsibilities assigned to the individual’s role (e.g., Property &amp; Casualty).
+        Maintaining active licensure, completing continuing education, and reporting licensing issues are conditions of employment.
+      </p>
+
+      <h3>Licensing Compliance</h3>
+      <ul>
+        <li><strong>Initial Employment:</strong> Offers of employment for licensed positions are contingent upon the candidate possessing the required license(s) or obtaining them within a specified time frame outlined during the hiring process.</li>
+        <li><strong>Ongoing Employment:</strong> Continued employment is conditional upon maintaining current, active licenses. This includes fulfilling all continuing education (CE) requirements and submitting timely license renewals in accordance with TDI regulations.</li>
+        <li><strong>Reporting Requirements:</strong> Employees must immediately inform management of any changes to their licensing status, including suspensions, expirations, change of address or disciplinary actions taken by the TDI.</li>
+        <li><strong>Failure to Maintain Licensure:</strong> Failure to obtain or maintain the necessary licensure may result in reassignment, suspension, or termination of employment, depending on the nature of the role and applicable legal and regulatory standards.</li>
+      </ul>
+
+      <h3>Background Checks</h3>
+      <p>
+        For applicants applying for positions that require a valid insurance license in the state of Texas, background checks may include
+        but are not limited to:
+      </p>
+      <ul>
+        <li>Criminal history (state and federal)</li>
+        <li>Credit report, as permitted by law</li>
+        <li>Professional license verification, including status and any past disciplinary actions</li>
+        <li>Employment history</li>
+        <li>Education verification</li>
+        <li>Regulatory compliance history (e.g. TDI, NAIC reports)</li>
+      </ul>
+
+      <h3>Conditional Employment</h3>
+      <p>
+        All offers of employment for licensed roles are contingent upon the successful completion of the background check.
+        Any misrepresentation, omission, or failure to pass the background screening may result in withdrawal of an offer or
+        immediate termination of employment.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Payroll &amp; Compensation</h2>
+      <p>
+        Employees are paid via direct deposit on the 1st and 15th of each month, subject to banking holidays. Employees are
+        responsible for maintaining accurate payroll and tax information.
+      </p>
+      <p>
+        Compensation adjustments and incentives are based on performance, role responsibilities, and company results and are not guaranteed.
+        These plans are adjusted from time to time. All plans will be in writing and approved by the agency president.
+      </p>
+
+      <h3>Employee Benefits</h3>
+      <p>
+        Benchmark offers medical, dental, vision, life insurance, short-term and long-term disability, paid holidays, and paid time off.
+        Eligibility and plan details are provided during onboarding and open enrollment. These plans are adjusted from time to time.
+      </p>
+
+      <h3>Company Holidays</h3>
+      <p class="muted">
+        New Years Day, Juneteenth, Black Friday – Day after Thanksgiving Day, MLK Day, Independence Day, Christmas Eve,
+        Good Friday, Labor Day, Christmas Day, Memorial Day, Thanksgiving Day, New Years Eve.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Paid Time Off (PTO) Policy</h2>
+      <p>
+        Our Paid Time Off (PTO) policy is designed to provide employees with time for rest, personal needs, and family responsibilities
+        while balancing the company’s operational needs. Time off necessary to fulfill jury duty obligations is also considered time off
+        with pay (PTO).
+      </p>
+      <p>
+        Our company encourages regular PTO while preserving options for exceptional circumstances that may arise. Our policy allows a portion
+        of unused PTO to roll over into the following year, ensuring flexibility for employees while maintaining productivity and predictability
+        for the company.
+      </p>
+
+      <h3>Accrual of PTO</h3>
+      <p><strong>Eligibility:</strong> PTO is available to all full-time employees upon completion of 90 days of employment.</p>
+      <p>
+        <strong>Accrual Rate:</strong> Employees accrue PTO based on their length of service; after the first 2 years the employee accrues
+        1.5 days of PTO in addition to the previous year of employment till the 6th year as shown below:
+      </p>
+      <ul>
+        <li>0 to 2 Years of Service: 14 days annually (1.16 day monthly)</li>
+        <li>2 to 3 Years of Service: 15.5 days annually (1.29 day monthly)</li>
+        <li>3 to 4 Years of Service: 17 days annually (1.41 day monthly)</li>
+        <li>4 to 5 Years of Service: 18.5 days annually (1.54 day monthly)</li>
+        <li>5+ Years of Service: 20 days annually (1.66 day monthly)</li>
+      </ul>
+      <p class="muted">Note: PTO is accrued proportionally during each pay period.</p>
+
+      <div class="divider"></div>
+
+      <h3>Rollover of Unused PTO</h3>
+      <ul>
+        <li><strong>Rollover Limit:</strong> Employees may roll over up to 5 days or 40 hours of unused PTO into the next calendar year.</li>
+        <li><strong>Rollover Deadline:</strong> Rolled-over PTO must be used by June 30th of the following year, after which any remaining unused days will be forfeited.</li>
+        <li><strong>Rollover Restriction:</strong> Rollover PTO cannot exceed the annual rollover limit.</li>
+      </ul>
+
+      <h3>Maximum PTO Balance</h3>
+      <p>
+        Employees may not accrue a PTO balance exceeding 1.5 times their annual accrual limit. Once this cap is reached,
+        additional PTO will stop accruing until some PTO is used.
+      </p>
+
+      <h3>Scheduling and Use of PTO</h3>
+      <p>
+        Employees are encouraged to request PTO at least 2 weeks in advance for planned absences. PTO requests are subject
+        to approval by management based on business needs and staffing requirements. In cases of unplanned absences, employees
+        must notify their supervisor as soon as possible and update their PTO account accordingly.
+      </p>
+
+      <h3>PTO Payout Upon Separation</h3>
+      <ul>
+        <li><strong>Voluntary Separation:</strong> Employees who voluntarily leave the company will be paid for unused PTO accrued during the current year, up to a maximum of 10 days or 80 hours, unless otherwise required by law.</li>
+        <li><strong>Involuntary Separation:</strong> Employees terminated for cause will not receive payout for unused PTO, except where required by law.</li>
+      </ul>
+
+      <h3>Exclusions</h3>
+      <ul>
+        <li>PTO does not accrue during unpaid leaves of absence or while on long-term disability.</li>
+        <li>Rolled-over PTO cannot be cashed out and must be used within the rollover deadline.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Insurance Carrier Representation</h2>
+      <p>
+        No business is to be placed with an insurer with less than an "A-" A.M. Best Rating. Requests for exceptions for an individual policy
+        must be in writing and approved by the Agency President. These requests should indicate the type of policy, markets approached, and
+        other circumstances that affect placement.
+      </p>
+      <p>
+        Should an exception be granted, the insured would be asked to sign a statement acknowledging they have been advised of the A.M. Best rating.
+      </p>
+
+      <h3>Insurance Carrier and Broker Agreement</h3>
+      <p>
+        The authority to sign insurance company contracts, brokerage contracts or vendor agreements resides with the agency president or V.P. Operations.
+      </p>
+
+      <h3>Capital Expenditures</h3>
+      <p>
+        Capital expenditures will be planned for in the annual budget process. These expenditures are reviewed and approved by the agency president.
+        No employee – except the agency president has the authority to bind Benchmark on any service or contract.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Errors and Omissions / Customer Complaints</h2>
+      <p>
+        Benchmark understands the importance and value of our brand. We also understand that from time to time we will have clients that are unhappy
+        with our product or services. The agency will track complaints and potential errors and omissions through an incident log.
+      </p>
+      <p>
+        Incidents will be tracked and communicated to the agency's president as a standing agenda item. In addition, these items will be shared with
+        appropriate Benchmark team members on a need-to-know basis.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Agency Expense Reimbursement</h2>
+      <p>
+        Benchmark understands that its greatest asset is its employees. We will provide up to $500 on an annual basis to enhance professional development.
+        This must have prior approval from your manager or agency ownership.
+      </p>
+
+      <h2>Education Policy</h2>
+      <p>
+        Benchmark’s strength lies in our people – the ability to assist clients in constructing their protection programs. The agency supports the
+        development of our employees in terms of the technical and operational aspects of the agency. In addition, regulators require continuing
+        education credits to maintain compliance for the licensed employee.
+      </p>
+      <p>
+        A personal development program will be a portion of the employee’s annual review process. The development program will be reviewed/approved
+        by the employee’s direct manager and the agency president.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Technology, Security &amp; Confidentiality</h2>
+      <p>
+        Company technology and systems are provided for business use only. Employees must comply with cybersecurity, password management, data protection,
+        and confidentiality requirements. Unauthorized access, disclosure, or misuse of company or client information is strictly prohibited.
+      </p>
+
+      <h3>Records Retention &amp; Compliance</h3>
+      <p>
+        Benchmark complies with insurance regulations and record retention requirements. Employees are responsible for maintaining accurate and secure records.
+      </p>
+    </section>
+
+    <section class="card" id="employee-acknowledgment">
+        <h2>Employee Acknowledgment</h2>
+        <p class="muted">
+          Please review the handbook and complete the acknowledgment via DocuSign.
+        </p>
+      
+        <a
+          class="docusign-btn"
+          href="https://www.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=0df10cb1-b033-4ccb-ae51-be8551fa6173&env=na1&acct=9cd37038-c613-4f0c-9361-08335ed1a4cd&v=2"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sign Employee Acknowledgment (DocuSign)
+        </a>
+      
+        <p class="muted" style="margin-top: 12px;">        </p>
+      </section>      
+  </main>
 </body>
 </html>
