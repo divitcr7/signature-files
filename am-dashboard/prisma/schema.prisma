@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  AM
+  MANAGEMENT
+}
+
+model AccountManager {
+  id         Int      @id @default(autoincrement())
+  name       String
+  email      String   @unique
+  active     Boolean  @default(true)
+  created_at DateTime @default(now())
+
+  users   User[]
+  metrics MetricMonthly[]
+}
+
+model User {
+  id         String    @id
+  name       String
+  email      String    @unique
+  role       UserRole  @default(AM)
+  amId       Int?      
+  created_at DateTime  @default(now())
+
+  accountManager AccountManager? @relation(fields: [amId], references: [id])
+}
+
+model MetricMonthly {
+  id              String   @id
+  amName           String
+  month            String
+  netRetention     Float
+  grossRetention   Float
+  renewalPremium   Float
+  lostPremium      Float
+  newBizPremium    Float
+  policyCountStart Int
+  policyCountEnd   Int
+  accountManagerId Int
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  accountManager AccountManager @relation(fields: [accountManagerId], references: [id])
+
+  @@index([accountManagerId])
+  @@index([month])
+}

@@ -1,0 +1,14 @@
+am-dashboard/node_modules/
+am-dashboard/.next/
+am-dashboard/out/
+am-dashboard/dist/
+am-dashboard/.env*
+am-dashboard/node_modules/
+am-dashboard/.next/
+am-dashboard/out/
+am-dashboard/dist/
+am-dashboard/.env*
+.DS_Store
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
